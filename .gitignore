@@ -1,0 +1,9 @@
+Runtime/
+/Upload/
+/Images/
+/nbproject/
+/.idea/
+
+plife.sql
+
+.DS_Store

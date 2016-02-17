@@ -1,0 +1,58 @@
+<extend name="Public:base"/>
+<block name='customermenu'>active</block>
+<block name="pagecont">
+    <div id="main-container">
+        <div class="padding-md">
+            <div class="panel panel-default table-responsive">
+                <div class="panel-heading">
+                    <h4>苏州电工集团--数据日报</h4>
+                </div>
+                <table class="table table-striped" id="responsiveTable">
+                    <thead>
+                    <tr>
+                        <th width="25%">报告项目</th>
+                        <th width="25%">总数</th>
+                        <th width="25%">总人数</th>
+                        <th width="25%">人均</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>应用下载情况</td>
+                        <td class="center">
+                            50
+                        </td>
+                        <td class="center">125</td>
+                        <td class="center">
+                            3.85
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>游戏下载情况</td>
+                        <td class="center">
+                            50
+                        </td>
+                        <td class="center">125</td>
+                        <td class="center">
+                            3.85
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>视频观看情况</td>
+                        <td class="center">
+                            50
+                        </td>
+                        <td class="center">125</td>
+                        <td class="center">
+                            3.85
+                        </td>
+                    </tr>
+                    <tr><td colspan="4">
+                        <a type="button" class="btn btn-outline btn-info btn-xs" href="{:U('Customer/customermgr')}">返回</a>
+                    </td></tr>
+                    </tbody>
+                </table>
+            </div><!-- /panel -->
+        </div><!-- /.padding-md -->
+    </div><!-- /main-container -->
+</block>

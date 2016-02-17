@@ -1,0 +1,124 @@
+<extend name="Public:base"/>
+
+<block name='resmenu'>active open</block>
+
+<block name='ressubmenuvideomgr'>active</block>
+
+<block name="pagecont">
+
+<div id="main-container">
+
+	<div class="padding-md">
+
+		<div class="panel panel-default">
+
+			<div class="panel-heading">
+
+				<h3>视频信息查看</h3>
+
+			</div>
+
+			<div class="panel-body">
+
+				<form id="formToggleLine" action="__ACTION__" class="form-horizontal no-margin form-border"  method="post" enctype="multipart/form-data">
+
+			
+                                        <div class="form-group">
+						<label class="col-lg-2 control-label">名称</label>
+
+						<div class="col-lg-8">
+
+							<input class="form-control" type="text"   value="{$da->title}" >
+
+						</div>
+					</div>
+                                    
+                                    <div class="form-group">
+						<label class="col-lg-2 control-label">剧照</label>
+
+						<div class="col-lg-8">
+
+							<img src="{$Think.config.MMS_SERVER}/{$uuid}/{$da->poster}"/>
+
+						</div>
+					</div>
+                                    
+                                        <div class="form-group">
+						<label class="col-lg-2 control-label">演员</label>
+
+						<div class="col-lg-8">
+
+							<input class="form-control" type="text"   value="{$da->actors}" >
+
+						</div>
+					</div>
+                                    
+
+                                        <div class="form-group">
+						<label class="col-lg-2 control-label">地区</label>
+
+						<div class="col-lg-8">
+
+							<input class="form-control" type="text"  value="{$da->area}" >
+
+						</div>
+					</div>
+                                        <div class="form-group">
+                                    		<label class="col-lg-2 control-label">影片简介</label>
+
+						<div class="col-lg-8">
+
+						
+                                                         <textarea class="form-control" rows="6" >{$da->summary_short}</textarea>
+
+						</div>
+					</div>
+                                                                            <div class="form-group">
+						<label class="col-lg-2 control-label">播放时间</label>
+
+						<div class="col-lg-8">
+
+							<input class="form-control" type="text"   value="{$da->time}" >
+
+						</div>
+					</div>
+                                        <div class="form-group">
+                                                <label class="col-lg-2 control-label">导演</label>
+
+						<div class="col-lg-8">
+
+							<input class="form-control" type="text"   value="{$da->director}" >
+
+						</div>
+					</div
+                                       
+                                        
+                                 
+                                        
+                                        <div class="form-group">
+                                                <label class="col-lg-2 control-label">次数</label>
+
+						<div class="col-lg-8">
+
+							<input class="form-control" type="text"   value="{$da->play_count}" >
+
+						</div>
+					</div>
+                                        
+                                        
+                                		
+                                    
+	
+
+
+				</form>
+
+			</div>
+
+		</div>
+
+	</div>
+
+</div>
+
+</block> 

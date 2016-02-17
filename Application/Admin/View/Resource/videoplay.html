@@ -1,0 +1,56 @@
+<extend name="Public:base"/>
+
+<block name='resmenu'>active open</block>
+
+<block name='ressubmenuvideomgr'>active</block>
+
+<block name="pagecont">
+
+<div id="main-container">
+
+	<div class="padding-md">
+
+		<div class="panel panel-default">
+
+			<div class="panel-heading">
+
+				<h3>视频播放</h3>
+                                    
+			</div>
+
+			<div class="panel-body">
+                            <div class="form-group">
+
+						<label class="col-lg-2 control-label">视频名称:</label><label class="col-lg-2 control-label">{$name}</label>
+
+						
+
+					</div>
+                            <div class="form-group">
+                                <!--HLSPlayer代码开始-->
+                                <div class="video" id="HLSPlayer" >
+                                <SCRIPT LANGUAGE=JavaScript>
+                                <!--
+                                var vID        = ""; 
+                                var vWidth     = "100%";                //播放器宽度设置
+                                var vHeight    = 400;                   //播放器宽度设置
+                                var vPlayer    = "__PUBLIC__/Admin/play/HLSPlayer.swf"; //播放器文件
+                                var vHLSset    = "__PUBLIC__/Admin/play/HLS.swf";             //HLS配置
+                                var vPic       = "__PUBLIC__/Admin/play/start.jpg";    //视频缩略图
+                                var vCssurl    = "__PUBLIC__/Admin/play/mini.css";     //移动端CSS应用文件
+                                var vHLSurl    = "{$Think.config.MMS_SERVER}/{$uuid}/playlist.m3u8";
+                                //-->
+                                </SCRIPT> 
+                                <script type="text/javascript" src="__PUBLIC__/Admin/play/hls.min.js"></script>
+                                </div>
+                                <!--HLSPlayer代码结束-->
+                            </div>
+			</div>
+
+		</div>
+
+	</div>
+
+</div>
+
+</block> 

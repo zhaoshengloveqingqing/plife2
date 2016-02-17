@@ -1,0 +1,65 @@
+<extend name="Public:base"/>
+<block name='systemmenu'>active</block>
+<block name='systemsubmenuadminusermgr'>active</block>
+<block name="extjs">
+    <!-- Parsley -->
+    <script src="__PUBLIC__/Admin/Endless/js/parsley.cn.min.js"></script>
+</block>
+<block name="pagecont">
+    <div id="main-container">
+        <div class="padding-md">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3>后台用户编辑</h3>
+                </div>
+                <div class="panel-body">
+                    <if condition="($errcode neq 0) OR ($errcode neq '0')">
+                        <div class="alert alert-danger">
+                            <strong>警告：
+                                <switch name="errcode" >
+                                    <case value="1">用户名已存在，保存失败，请联系管理员!</case>
+                                    <case value="2"> </case>
+                                    <case value="3"> </case>
+                                    <case value="9">保存成功！</case>
+                                </switch>
+                            </strong>
+                        </div>
+                    </if>
+                    <form id="formToggleLine" class="form-horizontal no-margin form-border" data-validate="parsley" novalidate action="__ACTION__" method="post">
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label">登陆用户名</label>
+                            <div class="col-lg-10">
+                                <input class="form-control" type="text" placeholder="请输入登陆用户名"  data-required="true" name="username" value="{$data.username}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label">用户昵称</label>
+                            <div class="col-lg-10">
+                                <input class="form-control" type="text" placeholder="请输入用户昵称"  data-required="true" name="nickname" value="{$data.nickname}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label">密码</label>
+                            <div class="col-lg-10">
+                                <if condition="($act eq 'edit')">
+                                    <input class="form-control" type="text" placeholder="请输入密码，若不输入则默认不修改密码" name="password">
+                                    <else />
+                                    <input class="form-control" type="text" placeholder="请输入密码" name="password">
+                                </if>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label"></label>
+                            <div class="col-lg-10">
+                                <input type="hidden" name="act" value="{$act}"/>
+                                <input type="hidden" name="id" value="{$data.uid}"/>
+                                <button type="submit" class="btn btn-success">保存</button>
+                                <a href="{:U('System/adminusermgr')}" type="reset" class="btn btn-danger">取消</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</block>

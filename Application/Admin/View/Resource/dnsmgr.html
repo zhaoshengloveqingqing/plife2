@@ -1,0 +1,50 @@
+<extend name="Public:base"/>
+<block name='resmenu'>active open</block>
+<block name='ressubmenudnsmgr'>active</block>
+<block name="pagecont">
+    <div id="main-container">
+        <div class="padding-md">
+            <div class="panel panel-default table-responsive">
+                <div class="panel-heading">
+                    <h4>DNS管理
+                    <span class="label label-info pull-right">共 {$total} 项</span></h4>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-4 col-sm-4">
+                            <a href="{:U('Resource/adddns')}" class="btn btn-sm btn-success" type="button"><i class="fa fa-plus fa-lg"></i> 增加DNS</a>
+                        </div><!-- /.col -->
+                    </div><!-- /.row -->
+                </div>
+                <table class="table table-striped" id="responsiveTable">
+                    <thead>
+                    <tr>
+                        <th width="15%">主机名</th>
+                        <th width="15%">IP地址</th>
+                        <th width="20%">DNS</th>
+                        <th width="15%">排序</th>
+                        <th width="25%">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <volist name="data" id="vo">
+                        <tr>
+                            <td>{$vo.hostname}</td>
+                            <td>{$vo.hostip}</td>
+                            <td>{$vo.dns}</td>
+                            <td>{$vo.sort}</td>
+                            <td class="center">
+                                <a href="{:U('Resource/editdns',array('id'=>$vo['id']))}" type="button" class="btn btn-outline btn-primary btn-xs">修改</a>
+                                <a type="button" class="btn btn-outline btn-primary btn-xs" href="{:U('Resource/deldns',array('id'=>$vo['id']))}" onclick="if(!confirm('您是否确定要删除该DNS记录？')){return  false;}">删除</a>
+                            </td>
+                        </tr>
+                    </volist>
+                    </tbody>
+                </table>
+                <div class="panel-footer clearfix">
+                    {$page}
+                </div>
+            </div><!-- /panel -->
+        </div><!-- /.padding-md -->
+    </div><!-- /main-container -->
+</block> 

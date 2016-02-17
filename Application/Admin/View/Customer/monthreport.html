@@ -1,0 +1,57 @@
+<extend name="Public:base"/>
+<block name="extcss">
+    <link href="__PUBLIC__/Admin/Endless/css/colorbox/colorbox.css" rel="stylesheet">
+</block>
+<block name="extjs">
+    <!-- Flot -->
+    <script src='__PUBLIC__/Admin/Endless/js/jquery.flot.min.js'></script>
+    <!-- Colorbox -->
+    <script src="__PUBLIC__/Admin/Endless/js/jquery.colorbox.min.js"></script>
+    <script src="__PUBLIC__/Admin/Endless/js/endless/endless_dashboard.js"></script>
+</block>
+<block name='customermenu'>active</block>
+<block name="pagecont">
+    <div id="main-container">
+        <div class="panel panel-default table-responsive">
+            <div class="panel-heading">
+                <h4>苏州电工集团--数据月报</h4>
+            </div>
+            <div class="alert alert-danger">
+                <strong>注意 :</strong> 这是报表样例，实际数据过来后将改为针对实际情况的包含应用、游戏、视频等内容的真实报表.
+            </div>
+        </div>
+        <div class="padding-md">
+            <div class="panel panel-default">
+                <div class="panel-heading clearfix">
+                    <span class="pull-left"><i class="fa fa-bar-chart-o fa-lg"></i> 30日应用下载数据</span>
+                    <!--ul class="tool-bar">
+                        <li><a href="#" class="refresh-widget" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Refresh"><i class="fa fa-refresh"></i></a></li>
+                    </ul-->
+                </div>
+                <div class="panel-body" id="trafficWidget">
+                    <div id="placeholder" class="graph" style="height:250px"></div>
+                </div>
+                <div class="panel-footer">
+                    <div class="row row-merge">
+                        <div class="col-xs-4 text-center border-right">
+                            <h4 class="no-margin">1232</h4>
+                            <small class="text-muted">下载量</small>
+                        </div>
+                        <div class="col-xs-4 text-center border-right">
+                            <h4 class="no-margin">5421</h4>
+                            <small class="text-muted">下载人数</small>
+                        </div>
+                        <div class="col-xs-4 text-center border-right">
+                            <h4 class="no-margin">2.85</h4>
+                            <small class="text-muted">人均</small>
+                        </div>
+                    </div>
+                </div>
+                <!--div class="loading-overlay">
+                    <i class="loading-icon fa fa-refresh fa-spin fa-lg"></i>
+                </div-->
+            </div>
+            <a type="button" class="btn btn-outline btn-info btn-xs" href="{:U('Customer/customermgr')}">返回</a>
+        </div>
+    </div>
+</block>

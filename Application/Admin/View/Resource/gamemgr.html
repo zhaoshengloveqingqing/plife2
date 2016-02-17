@@ -1,0 +1,70 @@
+<extend name="Public:base"/>
+<block name='resmenu'>active open</block>
+<block name='ressubmenugamemgr'>active</block>
+<block name="pagecont">
+    <div id="main-container">
+        <div class="padding-md">
+            <div class="panel panel-default table-responsive">
+                <div class="panel-heading">
+                    <h4>游戏管理
+                    <span class="label label-info pull-right">共 {$total} 项</span></h4>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-4 col-sm-4">
+                            <a href="{:U('Resource/addgame')}" class="btn btn-sm btn-success" type="button"><i class="fa fa-plus fa-lg"></i> 增加游戏</a>
+                        </div><!-- /.col -->
+                    </div><!-- /.row -->
+                </div>
+                <table class="table table-striped" id="responsiveTable">
+                    <thead>
+                    <tr>
+                        <th width="15%">游戏名称</th>
+                        <th width="15%">当前版本</th>
+                        <th width="15%">发布时间</th>
+                        <th width="15%">推荐</th>
+                        <th width="10%">下载量</th>
+                        <th width="10%">状态</th>
+                        <th width="25%">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <volist name="data" id="vo">
+                        <tr>
+                            <td>{$vo.name}</td>
+                            <td>{$vo.version}</td>
+                            <td>{$vo.pubdate}</td>
+                            <td><if condition="($vo.isrecommend eq '0')">不推荐<else />推荐</if></td>
+                            <td class="center">{$vo.downtimes}</td>
+                            <td class="center">
+                                <if condition="($vo.status eq 1) ">
+                                    <a class="btn btn-success btn-xs">正常</a>
+                                    <else/>
+                                    <a class="btn btn-danger btn-xs">下架</a>
+                                </if>
+                            </td>
+                            <td class="center">
+                                <if condition="($vo.isrecommend eq 0) ">
+                                    <a type="button" class="btn btn-outline btn-primary btn-xs" href="{:U('Resource/game_isrecommend',array('id'=>$vo['id'],'isrecommend'=>'1'))}" onclick="if(!confirm('您是否确定推荐该游戏？？')){return  false;}">推荐</a>
+                                    <else/>
+                                    <a type="button" class="btn btn-outline btn-primary btn-xs" href="{:U('Resource/game_isrecommend',array('id'=>$vo['id'],'isrecommend'=>'0'))}" onclick="if(!confirm('您是否确定不推荐该游戏？？')){return  false;}">取消推荐</a>
+                                </if>
+                                <a href="{:U('Resource/editgame',array('id'=>$vo['id']))}" type="button" class="btn btn-outline btn-primary btn-xs">修改</a>
+                                <a type="button" class="btn btn-outline btn-primary btn-xs" href="{:U('Resource/delgame',array('id'=>$vo['id']))}" onclick="if(!confirm('您是否确定要删除该游戏记录？？')){return  false;}">删除</a>
+                                <if condition="($vo.status eq 2) ">
+                                    <a type="button" class="btn btn-outline btn-primary btn-xs" href="{:U('Resource/chggamestatus',array('id'=>$vo['id'],'status'=>'1'))}" onclick="if(!confirm('您是否确定要上架该游戏记录？？')){return  false;}">上架</a>
+                                    <else/>
+                                    <a type="button" class="btn btn-outline btn-primary btn-xs" href="{:U('Resource/chggamestatus',array('id'=>$vo['id'],'status'=>'2'))}" onclick="if(!confirm('您是否确定要下架该游戏记录？？')){return  false;}">下架</a>
+                                </if>
+                            </td>
+                        </tr>
+                    </volist>
+                    </tbody>
+                </table>
+                <div class="panel-footer clearfix">
+                    {$page}
+                </div>
+            </div><!-- /panel -->
+        </div><!-- /.padding-md -->
+    </div><!-- /main-container -->
+</block> 

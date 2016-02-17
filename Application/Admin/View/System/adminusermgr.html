@@ -1,0 +1,118 @@
+<extend name="Public:base"/>
+<block name='systemmenu'>active</block>
+<block name='systemsubmenuadminusermgr'>active</block>
+
+<block name="pagecont">
+    <div id="main-container">
+        <div class="padding-md">
+            <div class="panel panel-default table-responsive">
+                <div class="panel-heading">
+                    <h4>后台用户管理
+                        <span class="label label-info pull-right">共 {$total} 项</span></h4>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-4 col-sm-4">
+                            <a href="{:U('System/addadminuser')}" class="btn btn-sm btn-success" type="button"><i
+                                    class="fa fa-plus fa-lg"></i> 增加后台用户</a>
+                        </div>
+                        <div class="col-md-4 col-sm-4">
+                            <a href="http://user.pinet.co/api/login?appid=4000&template=user&callback={$backurl}" class="btn btn-sm btn-success" type="button"><i
+                                    class="fa fa-plus fa-lg"></i> 获取用户</a>
+                        </div>
+                        <div class="col-md-4 col-sm-4">
+                            <a href="{:U('System/logout')}" class="btn btn-sm btn-success" type="button"><i
+                                    class="fa fa-plus fa-lg"></i> 退出</a>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                    <!-- /.row -->
+                </div>
+                <table class="table table-striped" id="responsiveTable">
+                    <thead>
+                    <tr>
+                        <th width="20%">登陆用户名</th>
+                        <th width="15%">用户昵称</th>
+                        <th width="15%">所属权限组</th>
+                        <th width="20%">状态</th>
+                        <th width="30%">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <volist name="data" id="vo">
+                        <tr <if condition="($vo.status eq 1) ">  class="danger"</if> >
+                            <td>{$vo.username}</td>
+                            <td>{$vo.nickname}</td>
+                            <td>{$vo.groupname}</td>
+                            <td>
+                                <if condition="($vo.status eq 0) ">
+                                    <a class="btn btn-success btn-xs">正常</a>
+                                    <else/>
+                                    <a class="btn btn-danger btn-xs">冻结</a>
+                                </if>
+                            </td>
+                            <td class="center">
+                                <a href="{:U('System/editadminuser',array('id'=>$vo['uid']))}" type="button"
+                                   class="btn btn-outline btn-primary btn-xs">修改</a>
+                                <if condition="($vo.status eq '1')">
+                                    <a type="button" class="btn btn-outline btn-primary btn-xs"
+                                       href="{:U('System/chgadminuserstatus',array('id'=>$vo['uid'],'status'=>0))}"
+                                       onclick="if(!confirm('您是否确定要解冻该用户？')){return  false;}">
+                                        解冻
+                                    </a>
+                                    <else/>
+                                    <a type="button" class="btn btn-outline btn-primary btn-xs"
+                                       href="{:U('System/chgadminuserstatus',array('id'=>$vo['uid'],'status'=>1))}"
+                                       onclick="if(!confirm('您是否确定要冻结该用户？')){return  false;}">
+                                        冻结
+                                    </a>
+                                </if>
+                                <a type="button" href="#chgRoleModal" onclick="setAid({$vo.uid})" data-toggle="modal" class="btn btn-outline btn-primary btn-xs">权限变更</a>
+                            </td>
+                        </tr>
+                    </volist>
+                    </tbody>
+                </table>
+                <div class="panel-footer clearfix">
+                    {$page}
+                </div>
+                <div class="modal fade" id="chgRoleModal">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal"
+                                        aria-hidden="true">&times;</button>
+                                <h4>变更所属角色组</h4>
+                            </div>
+                            <form action="{:U('System/chgadminusergrp')}" method="post">
+                            <div class="modal-body">
+                                    <div class="form-group">
+                                        <label>选择权限组</label>
+                                        <select class="form-control" name="selgroup">
+                                            <volist name="admgrp" id="ao">
+                                                <option value="{$ao.id}">{$ao.groupname}</option>
+                                            </volist>
+                                        </select>
+                                    </div>
+
+                            </div>
+                            <div class="modal-footer">
+                                <input type="hidden" id="chgadmid" name="chgadmid" value="" />
+                                <button type="submit" class="btn btn-success btn-sm">提交</button>
+                                <button class="btn btn-danger btn-sm" data-dismiss="modal" aria-hidden="true">关闭
+                                </button>
+                            </div>
+                            </form>
+                        </div>
+                     </div>
+                 </div>
+             </div>
+         </div>
+     </div>
+    <script type="text/javascript">
+        function setAid(id){
+            $('#chgadmid').val(id);
+        }
+    </script>
+ </block>

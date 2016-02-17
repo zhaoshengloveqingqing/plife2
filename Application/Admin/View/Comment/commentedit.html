@@ -1,0 +1,114 @@
+<extend name="Public:base"/>
+<block name='commentmenu'>active</block>
+<block name="pagecont">
+    <div id="main-container">
+        <div class="padding-md">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <if condition="($act eq add) ">
+                        <h3>评论新增</h3>
+                        <else/>
+                        <h3>评论编辑</h3>
+                    </if>
+                </div>
+                <div class="panel-body">
+                    <form id="formToggleLine" class="form-horizontal no-margin form-border" method="post" action="__ACTION__"  enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label">评论者</label>
+                            <div class="col-lg-10">
+                                <input class="form-control" type="text" placeholder="请输入评论者" name="reviewer" value="{$data.reviewer}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label">类型</label>
+                            <div class="col-lg-10">
+                                <select  id="type" name="type">
+                                    <foreach name="types" item="vo">
+                                        <option value="{$vo.id}">
+                                            {$vo.value}
+                                        </option>
+                                    </foreach>
+                                </select>
+                                <select id ="resource_id" name="resource_id">
+                                    <foreach name="resource" item="vo">
+                                        <option value="{$vo.id}">
+                                            {$vo.name}
+                                        </option>
+                                    </foreach>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label">评论内容</label>
+                            <div class="col-lg-10">
+                                <textarea class="form-control" rows="5" placeholder="请输入评论内容" name="contact">{$data.contact}</textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label"></label>
+                            <div class="col-lg-10">
+                                <input type="hidden" name="act" value="{$act}"/>
+                                <input type="hidden" name="id" value="{$data.id}"/>
+                                <button type="submit" class="btn btn-success">保存</button>
+                                <a href="{:U('Comment/commentmgr')}" type="reset" class="btn btn-danger">取消</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</block>
+
+
+<block name="extjs">
+    <script language="javascript" type="text/javascript">
+        $(function(){
+            $("select[name='type']").find('option').each(function(){
+                var self=this;
+                if($(self).val()== {$data['type']}){
+                    $(self).attr('selected',true);
+                }
+            });
+        });
+        $(function(){
+            $("#resource_id").append("<option value='" + '0' + "'>" + '请选择' + "</option>");
+            $("select[name='resource_id']").find('option').each(function(){
+                var self=this;
+                if($(self).val()== {$data['resource_id']}){
+                    $(self).attr('selected',true);
+                }
+            });
+        })
+    </script>
+    <script language="javascript" type="text/javascript">
+        $("#resource_id").append("<option value='" + '0' + "'>" + '请选择' + "</option>");
+        $(function(){
+            $("#type").change(function(){
+                if($(this).val()=='0'){
+                    $("#resource_id").html("");
+                    $("#resource_id").append("<option value='" + '0' + "'>" + '请选择' + "</option>");
+                }else{
+                    console.log($(this).val());
+                    $.ajax({
+                        type: "POST",
+                        dataType: "json",
+                        url: "http://localhost/~morganzhao/plife/index.php/Comment/ajaxcomments.html",
+                        data:{type:$(this).val()},
+                        success : function(data){
+                            if (data != null) {
+                                $("#resource_id").html("");
+                                $.each(data, function (index, item) {
+                                    //$("#SltType1").options.append( this.ItemNo , this.ItemName );
+                                    $("#resource_id").append("<option value='" + item.id + "'>" + item.name + "</option>");
+                                });
+                            }
+                        }
+                    });
+                }
+
+            })
+        })
+    </script>
+</block>

@@ -1,0 +1,439 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Pinet 管理后台</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Bootstrap core CSS -->
+    <link href="__PUBLIC__/Admin/Endless/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<!-- Font Awesome-->
+	<link href="__PUBLIC__/Admin/Endless/css/font-awesome.min.css" rel="stylesheet">
+	<!-- Pace -->
+	<link href="__PUBLIC__/Admin/Endless/css/pace.css" rel="stylesheet">
+	<!-- Datatable -->
+	<link href="__PUBLIC__/Admin/Endless/css/jquery.dataTables_themeroller.css" rel="stylesheet">
+	<!-- Endless -->
+	<link href="__PUBLIC__/Admin/Endless/css/endless.min.css" rel="stylesheet">
+	<link href="__PUBLIC__/Admin/Endless/css/endless-skin.css" rel="stylesheet">
+	  <block name="extcss"></block>
+  </head>
+
+  <body class="overflow-hidden">
+	<!-- Overlay Div -->
+	<div id="overlay" class="transparent"></div>
+	<a href="" id="theme-setting-icon"><i class="fa fa-cog fa-lg"></i></a>
+	<div id="theme-setting">
+		<div class="title">
+			<strong class="no-margin">Skin Color</strong>
+		</div>
+		<div class="theme-box">
+			<a class="theme-color" style="background:#323447" id="default"></a>
+			<a class="theme-color" style="background:#efefef" id="skin-1"></a>
+			<a class="theme-color" style="background:#a93922" id="skin-2"></a>
+			<a class="theme-color" style="background:#3e6b96" id="skin-3"></a>
+			<a class="theme-color" style="background:#635247" id="skin-4"></a>
+			<a class="theme-color" style="background:#3a3a3a" id="skin-5"></a>
+			<a class="theme-color" style="background:#495B6C" id="skin-6"></a>
+		</div>
+		<div class="title">
+			<strong class="no-margin">Sidebar Menu</strong>
+		</div>
+		<div class="theme-box">
+			<label class="label-checkbox">
+				<input type="checkbox" checked id="fixedSidebar">
+				<span class="custom-checkbox"></span>
+				Fixed Sidebar
+			</label>
+		</div>
+	</div><!-- /theme-setting -->
+
+	<div id="wrapper" class="preload">
+		<div id="top-nav" class="skin-6 fixed">
+			<div class="brand">
+				<span>Pinet</span>
+				<span class="text-toggle"> Admin</span>
+			</div><!-- /brand -->
+			<button type="button" class="navbar-toggle pull-left" id="sidebarToggle">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<button type="button" class="navbar-toggle pull-left hide-menu" id="menuToggle">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<ul class="nav-notification clearfix">
+				<li class="profile dropdown">
+					<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+						<strong>{$adname}</strong>
+						<span><i class="fa fa-chevron-down"></i></span>
+					</a>
+					<ul class="dropdown-menu">
+						<li>
+							<a class="clearfix" href="#">
+								<img src="{$Think.WEB_ROOT}Images/user.png" alt="User Avatar">
+								<div class="detail">
+									<strong>{$adname}</strong>
+								</div>
+							</a>
+						</li>
+						<li><a tabindex="-1" href="{:U('Adminuser/chgpasswd')}" class="theme-setting"><i class="fa fa-cog fa-lg"></i> 修改密码</a></li>
+						<li class="divider"></li>
+						<li><a tabindex="-1" class="main-link logoutConfirm_open" href="#logoutConfirm"><i class="fa fa-lock fa-lg"></i> 退出登陆</a></li>
+					</ul>
+				</li>
+			</ul>
+		</div><!-- /top-nav-->
+
+		<aside class="fixed skin-6">
+			<div class="sidebar-inner scrollable-sidebar">
+				<div class="size-toggle">
+					<a class="btn btn-sm" id="sizeToggle">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</a>
+					<a class="btn btn-sm pull-right logoutConfirm_open"  href="#logoutConfirm">
+						<i class="fa fa-power-off"></i>
+					</a>
+				</div><!-- /size-toggle -->
+				<div class="user-block clearfix">
+					<img src="{$Think.WEB_ROOT}Images/user.png" alt="User Avatar">
+					<div class="detail">
+						<strong>{$adname}</strong>
+						<ul class="list-inline">
+							<li><a href="{:U('Adminuser/chgpasswd')}">修改密码</a></li>
+						</ul>
+					</div>
+				</div><!-- /user-block -->
+				<div class="main-menu">
+					<ul>
+						<php>if (in_array('1_1_0', $_SESSION['menupriv']) || in_array('1_2_0', $_SESSION['menupriv']) || in_array('1_3_0', $_SESSION['menupriv'])|| in_array('1_4_0', $_SESSION['menupriv'])|| in_array('1_5_0', $_SESSION['menupriv'])) { </php>
+						<li class="openable <block name='resmenu'></block>">
+							<a href="#">
+								<span class="menu-icon">
+									<i class="fa fa-inbox fa-lg"></i>
+								</span>
+								<span class="text">
+									资源管理
+								</span>
+								<span class="menu-hover"></span>
+							</a>
+							<ul class="submenu">
+								<php>if (in_array('1_1_0', $_SESSION['menupriv']) ) { </php>
+								<li class="<block name='ressubmenuvideomgr'></block>"><a href="{:U('Resource/videomgr')}"><span class="submenu-label"><i class="fa fa-film fa-lg"></i>&nbsp;&nbsp;视频管理</span></a></li>
+								<php>}</php>
+								<php>if (in_array('1_2_0', $_SESSION['menupriv']) ) { </php>
+								<li class="<block name='ressubmenugamemgr'></block>"><a href="{:U('Resource/gamemgr')}"><span class="submenu-label"><i class="fa fa-tablet fa-lg"></i>&nbsp;&nbsp;游戏管理</span></a></li>
+								<php>}</php>
+								<php>if (in_array('1_3_0', $_SESSION['menupriv']) ) { </php>
+								<li class="<block name='ressubmenuappmgr'></block>"><a href="{:U('Resource/appmgr')}"><span class="submenu-label"><i class="fa fa-tag fa-lg"></i>&nbsp;&nbsp;应用管理</span></a></li>
+								<php>}</php>
+								<php>if (in_array('1_5_0', $_SESSION['menupriv']) ) { </php>
+								<li class="<block name='ressubmenudnsmgr'></block>"><a href="{:U('Resource/dnsmgr')}"><span class="submenu-label"><i class="fa fa-tag fa-lg"></i>&nbsp;&nbsp;DNS管理</span></a></li>
+								<php>}</php>
+							</ul>
+						</li>
+						<php>}</php>
+						<php>if (in_array('4_1_0', $_SESSION['menupriv']) || in_array('4_2_0', $_SESSION['menupriv'])) { </php>
+						<li class="openable <block name='adsmenu'></block>">
+							<a href="#">
+								<span class="menu-icon">
+									<i class="fa fa-inbox fa-lg"></i>
+								</span>
+								<span class="text">
+									广告管理
+								</span>
+								<span class="menu-hover"></span>
+							</a>
+							<ul class="submenu">
+								<php>if (in_array('4_1_0', $_SESSION['menupriv']) ) { </php>
+								<li class="<block name='adssubmenubannermgr'></block>"><a href="{:U('Ads/bannermgr')}"><span class="submenu-label"><i class="fa fa-tag fa-lg"></i>&nbsp;&nbsp;广告列表</span></a></li>
+								<php>}</php>
+								<php>if (in_array('4_2_0', $_SESSION['menupriv']) ) { </php>
+								<li class="<block name='adssubmenupositionmgr'></block>"><a href="{:U('Ads/positionmgr')}"><span class="submenu-label"><i class="fa fa-tag fa-lg"></i>&nbsp;&nbsp;广告位置</span></a></li>
+								<php>}</php>
+							</ul>
+						</li>
+						<php>}</php>
+						<php>if (in_array('5_0', $_SESSION['menupriv'])) { </php>
+						<li class="<block name='commentmenu'></block>">
+							<a href="{:U('Comment/commentmgr')}">
+								<span class="menu-icon">
+									<i class="fa fa-user-md fa-lg"></i>
+								</span>
+								<span class="text">
+									评论管理
+								</span>
+								<span class="menu-hover"></span>
+							</a>
+						</li>
+						<php>}</php>
+						<php>if (in_array('6_0', $_SESSION['menupriv'])) { </php>
+						<li class="<block name='categorymenu'></block>">
+							<a href="{:U('Category/categorymgr')}">
+								<span class="menu-icon">
+									<i class="fa fa-user-md fa-lg"></i>
+								</span>
+								<span class="text">
+									类别管理
+								</span>
+								<span class="menu-hover"></span>
+							</a>
+						</li>
+						<php>}</php>
+						<php>if (in_array('2_0', $_SESSION['menupriv'])) { </php>
+						<li class="<block name='customermenu'></block>">
+							<a href="{:U('Customer/customermgr')}">
+								<span class="menu-icon">
+									<i class="fa fa-user-md fa-lg"></i>
+								</span>
+								<span class="text">
+									客户管理
+								</span>
+								<span class="menu-hover"></span>
+							</a>
+						</li>
+						<php>}</php>
+						<php>if (in_array('3_0', $_SESSION['menupriv'])) { </php>
+						<li class="<block name='reportmenu'></block>">
+							<a href="{:U('Report/index')}">
+								<span class="menu-icon">
+									<i class="fa fa-bar-chart-o fa-lg"></i>
+								</span>
+								<span class="text">
+									数据报表
+								</span>
+								<span class="menu-hover"></span>
+							</a>
+						</li>
+						<php>}</php>
+						<php>if (in_array('9_1_0', $_SESSION['menupriv']) || in_array('9_2_0', $_SESSION['menupriv']) ) { </php>
+						<li class="openable  <block name='systemmenu'></block>">
+							<a href="#">
+								<span class="menu-icon">
+									<i class="fa fa-inbox fa-lg"></i>
+								</span>
+								<span class="text">
+									系统管理
+								</span>
+								<span class="menu-hover"></span>
+							</a>
+							<ul class="submenu">
+								<php>if (in_array('9_1_0', $_SESSION['menupriv']) ) { </php>
+								<li class="<block name='systemsubmenurolemgr'></block>"><a href="{:U('System/rolemgr')}"><span class="submenu-label"><i class="fa fa-unlock fa-lg"></i>&nbsp;&nbsp;角色权限管理</span></a></li>
+								<php>}</php>
+								<php>if (in_array('9_2_0', $_SESSION['menupriv']) ) { </php>
+								<li class="<block name='systemsubmenuadminusermgr'></block>"><a href="{:U('System/adminusermgr')}"><span class="submenu-label"><i class="fa fa-user fa-lg"></i>&nbsp;&nbsp;用户管理</span></a></li>
+								<php>}</php>
+							</ul>
+						</li>
+						<php>}</php>
+					</ul>
+				</div><!-- /main-menu -->
+			</div><!-- /sidebar-inner scrollable-sidebar -->
+		</aside>
+		<block name="pagecont">
+		<div id="main-container">
+			<div class="padding-md">
+				<div class="panel panel-default table-responsive">
+					<div class="panel-heading">
+						Responsive Table
+						<span class="label label-info pull-right">790 Items</span>
+					</div>
+					<div class="panel-body">
+						<div class="row">
+							<div class="col-md-4 col-sm-4">
+								<select class="input-sm form-control inline" style="width:130px;">
+									<option value="0">All</option>
+									<option value="1">Men</option>
+									<option value="2">Women</option>
+									<option value="3">Accessary</option>
+								</select>
+								<a class="btn btn-default btn-sm">Apply</a>
+							</div><!-- /.col -->
+						</div><!-- /.row -->
+					</div>
+					<table class="table table-striped" id="responsiveTable">
+						<thead>
+							<tr>
+								<th>
+									<label class="label-checkbox">
+										<input type="checkbox" id="chk-all">
+										<span class="custom-checkbox"></span>
+									</label>
+								</th>
+								<th>Product</th>
+								<th>Price</th>
+								<th>Quantity</th>
+								<th>Sales</th>
+								<th>Date</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>
+									<label class="label-checkbox">
+										<input type="checkbox" class="chk-row">
+										<span class="custom-checkbox"></span>
+									</label>
+								</td>
+								<td>Leather Bag</td>
+								<td>$89</td>
+								<td>30</td>
+								<td>187</td>
+								<td>Oct 08,2013</td>
+								<td><span class="label label-success">In Stock</span></td>
+							</tr>
+							<tr>
+								<td>
+									<label class="label-checkbox">
+										<input type="checkbox" class="chk-row">
+										<span class="custom-checkbox"></span>
+									</label>
+								</td>
+								<td>Brown Sunglasses <span class="label label-success m-left-xs">Best Seller</span> </td>
+								<td>$120</td>
+								<td>0</td>
+								<td>861</td>
+								<td>Oct 07,2013</td>
+								<td><span class="label label-danger">Sold Out</span></td>
+							</tr>
+							<tr>
+								<td>
+									<label class="label-checkbox">
+										<input type="checkbox" class="chk-row">
+										<span class="custom-checkbox"></span>
+									</label>
+								</td>
+								<td>Casual Boots</td>
+								<td>$99</td>
+								<td>100</td>
+								<td>12</td>
+								<td>Oct 06,2013</td>
+								<td><span class="label label-success">In Stock</span></td>
+							</tr>
+							<tr>
+								<td>
+									<label class="label-checkbox">
+										<input type="checkbox" class="chk-row">
+										<span class="custom-checkbox"></span>
+									</label>
+								</td>
+								<td>Lambskin Sport Coat</td>
+								<td>$4000</td>
+								<td>7</td>
+								<td>41</td>
+								<td>Oct 06,2013</td>
+								<td><span class="label label-success">In Stock</span></td>
+							</tr>
+							<tr>
+								<td>
+									<label class="label-checkbox">
+										<input type="checkbox" class="chk-row">
+										<span class="custom-checkbox"></span>
+									</label>
+								</td>
+								<td>Summer Dress</td>
+								<td>$310</td>
+								<td>25</td>
+								<td>39</td>
+								<td>Oct 05,2013</td>
+								<td><span class="label label-success">In Stock</span></td>
+							</tr>
+						</tbody>
+					</table>
+					<div class="panel-footer clearfix">
+						<ul class="pagination pagination-xs m-top-none pull-right">
+							<li class="disabled"><a href="#">Previous</a></li>
+							<li class="active"><a href="#">1</a></li>
+							<li><a href="#">2</a></li>
+							<li><a href="#">3</a></li>
+							<li><a href="#">4</a></li>
+							<li><a href="#">5</a></li>
+							<li><a href="#">Next</a></li>
+						</ul>
+					</div>
+				</div><!-- /panel -->
+			</div><!-- /.padding-md -->
+		</div><!-- /main-container -->
+		</block>
+	</div><!-- /wrapper -->
+
+	<a href="" id="scroll-to-top" class="hidden-print"><i class="fa fa-chevron-up"></i></a>
+
+	<!-- Logout confirmation -->
+	<div class="custom-popup width-100" id="logoutConfirm">
+		<div class="padding-md">
+			<h4 class="m-top-none"> 确定要退出后台?</h4>
+		</div>
+
+		<div class="text-center">
+			<a class="btn btn-success m-right-sm" href="{:U('Adminuser/logout')}">退出</a>
+			<a class="btn btn-danger logoutConfirm_close">取消</a>
+		</div>
+	</div>
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+
+	<!-- Jquery -->
+	<script src="__PUBLIC__/Admin/Endless/js/jquery-1.10.2.min.js"></script>
+
+	<!-- Bootstrap -->
+    <script src="__PUBLIC__/Admin/Endless/bootstrap/js/bootstrap.min.js"></script>
+
+	<!-- Datatable -->
+	<script src='__PUBLIC__/Admin/Endless/js/jquery.dataTables.min.js'></script>
+
+	<!-- Modernizr -->
+	<script src='__PUBLIC__/Admin/Endless/js/modernizr.min.js'></script>
+
+	<!-- Pace -->
+	<script src='__PUBLIC__/Admin/Endless/js/pace.min.js'></script>
+
+	<!-- Popup Overlay -->
+	<script src='__PUBLIC__/Admin/Endless/js/jquery.popupoverlay.min.js'></script>
+
+	<!-- Slimscroll -->
+	<script src='__PUBLIC__/Admin/Endless/js/jquery.slimscroll.min.js'></script>
+
+	<!-- Cookie -->
+	<script src='__PUBLIC__/Admin/Endless/js/jquery.cookie.min.js'></script>
+
+	<!-- Endless -->
+	<script src="__PUBLIC__/Admin/Endless/js/endless/endless.js"></script>
+	<block name="extjs"></block>
+	<script>
+		$(function	()	{
+			$('#dataTable').dataTable( {
+				"bJQueryUI": true,
+				"sPaginationType": "full_numbers"
+			});
+
+			$('#chk-all').click(function()	{
+				if($(this).is(':checked'))	{
+					$('#responsiveTable').find('.chk-row').each(function()	{
+						$(this).prop('checked', true);
+						$(this).parent().parent().parent().addClass('selected');
+					});
+				}
+				else	{
+					$('#responsiveTable').find('.chk-row').each(function()	{
+						$(this).prop('checked' , false);
+						$(this).parent().parent().parent().removeClass('selected');
+					});
+				}
+			});
+		});
+	</script>
+
+  </body>
+</html>

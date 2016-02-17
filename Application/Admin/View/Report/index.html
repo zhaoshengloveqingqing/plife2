@@ -1,0 +1,136 @@
+<extend name="Public:base"/>
+<block name='reportmenu'>active</block>
+<block name="extcss">
+    <link href="__PUBLIC__/Admin/Endless/css/colorbox/colorbox.css" rel="stylesheet">
+</block>
+<block name="extjs">
+    <!-- Flot -->
+    <script src='__PUBLIC__/Admin/Endless/js/jquery.flot.min.js'></script>
+    <!-- Colorbox -->
+    <script src="__PUBLIC__/Admin/Endless/js/jquery.colorbox.min.js"></script>
+    <script src="__PUBLIC__/Admin/Endless/js/endless/endless_dashboard.js"></script>
+</block>
+<block name="pagecont">
+    <div id="main-container">
+        <div class="padding-md">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3>数据报表</h3>
+                </div>
+                <div class="alert alert-danger">
+                    <strong>注意 :</strong> 这是报表样例，实际数据过来后将改为针对实际情况的包含应用、游戏、视频等内容的真实报表.
+                </div>
+                <div class="padding-md">
+                    <div class="panel panel-default">
+                        <div class="panel-heading clearfix">
+                            <span class="pull-left"><h4><i class="fa fa-bar-chart-o fa-lg"></i> 30日应用下载数据</h4></span>
+                            <!--ul class="tool-bar">
+                                <li><a href="#" class="refresh-widget" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Refresh"><i class="fa fa-refresh"></i></a></li>
+                            </ul-->
+                        </div>
+                        <div class="panel-body" id="trafficWidget">
+                            <div id="placeholder" class="graph" style="height:250px"></div>
+                        </div>
+                        <div class="panel-footer">
+                            <div class="row row-merge">
+                                <div class="col-xs-4 text-center border-right">
+                                    <h4 class="no-margin">1232</h4>
+                                    <small class="text-muted">下载量</small>
+                                </div>
+                                <div class="col-xs-4 text-center border-right">
+                                    <h4 class="no-margin">5421</h4>
+                                    <small class="text-muted">下载人数</small>
+                                </div>
+                                <div class="col-xs-4 text-center border-right">
+                                    <h4 class="no-margin">2.85</h4>
+                                    <small class="text-muted">人均</small>
+                                </div>
+                            </div>
+                        </div>
+                        <!--div class="loading-overlay">
+                            <i class="loading-icon fa fa-refresh fa-spin fa-lg"></i>
+                        </div-->
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading clearfix">
+                    <span class="pull-left"><h4><i class="fa fa-flag fa-lg"></i> 应用下载客户排行前5</h4></span>
+                </div>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>客户</th>
+                        <th>占比</th>
+                        <th></th>
+                        <th>排名</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>苏州电厂1</td>
+                        <td>
+                            <div class="progress progress-striped active" style="height:8px; margin:5px 0 0 0;">
+                                <div class="progress-bar progress-bar-danger" style="width: 45%">
+                                    <span class="sr-only">45%</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td>45%</td>
+                        <td><span class="badge badge-info">1</span></td>
+                    </tr>
+                    <tr>
+                        <td>苏州电厂2</td>
+                        <td>
+                            <div class="progress progress-striped active" style="height:8px; margin:5px 0 0 0;">
+                                <div class="progress-bar progress-bar-danger" style="width: 21%">
+                                    <span class="sr-only">21%</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td>21%</td>
+                        <td><span class="badge badge-info">2</span></td>
+                    </tr>
+                    <tr>
+                        <td>苏州电厂3</td>
+                        <td>
+                            <div class="progress progress-striped active" style="height:8px; margin:5px 0 0 0;">
+                                <div class="progress-bar progress-bar-danger" style="width: 8%">
+                                    <span class="sr-only">8%</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td>8%</td>
+                        <td><span class="badge badge-info">3</span></td>
+                    </tr>
+                    <tr>
+                        <td>苏州电厂4</td>
+                        <td>
+                            <div class="progress progress-striped active" style="height:8px; margin:5px 0 0 0;">
+                                <div class="progress-bar progress-bar-danger" style="width: 3%">
+                                    <span class="sr-only">3%</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td>3%</td>
+                        <td><span class="badge badge-info">4</span></td>
+                    </tr>
+                    <tr>
+                        <td>苏州电厂5</td>
+                        <td>
+                            <div class="progress progress-striped active" style="height:8px; margin:5px 0 0 0;">
+                                <div class="progress-bar progress-bar-danger" style="width: 1%">
+                                    <span class="sr-only">1%</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td>1%</td>
+                        <td><span class="badge badge-info">5</span></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div><!-- /panel -->
+        </div>
+    </div>
+</block>

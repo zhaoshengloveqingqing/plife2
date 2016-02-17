@@ -1,0 +1,115 @@
+<extend name="Public:base"/>
+<block name='systemmenu'>active</block>
+<block name='systemsubmenurolemgr'>active</block>
+
+<block name="pagecont">
+    <div id="main-container">
+        <div class="padding-md">
+            <div class="panel panel-default table-responsive">
+                <div class="panel-heading">
+                    <h4>[{$groupinfo.groupname}]角色权限管理</h4>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6">
+                            <button class="btn btn-danger btn-xs" onclick='selall(1)'>全选</button>
+                            &nbsp;&nbsp;
+                            <button class="btn btn-danger btn-xs" onclick='selall(0)'>反选</button>
+                        </div>
+                    </div>
+                </div>
+                <form id="formToggleLine" class="form-horizontal no-margin form-border" novalidate action="__ACTION__" method="post">
+                <table class="table table-striped" id="responsiveTable">
+                    <thead>
+                    <tr>
+                        <th width="30%">类别</th>
+                        <th width="70%">权限</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td rowspan="3">资源管理</td>
+                        <td>
+                            <label class="label-checkbox inline"><input type='checkbox' value='1_1_0' name='priv[]' {$groupinfo.priv.1_1_0}/><span class="custom-checkbox"></span>视频管理菜单</label>&nbsp;&nbsp;
+                            <label class="label-checkbox inline"><input type='checkbox' value='1_1_1' name='priv[]' {$groupinfo.priv.1_1_1}/><span class="custom-checkbox"></span>视频管理—列表</label>&nbsp;&nbsp;
+                            <label class="label-checkbox inline"><input type='checkbox' value='1_1_2' name='priv[]' {$groupinfo.priv.1_1_2}/><span class="custom-checkbox"></span>视频管理—添加</label>&nbsp;&nbsp;
+                            <label class="label-checkbox inline"><input type='checkbox' value='1_1_3' name='priv[]' {$groupinfo.priv.1_1_3}/><span class="custom-checkbox"></span>视频管理—修改</label>&nbsp;&nbsp;
+                            <label class="label-checkbox inline"><input type='checkbox' value='1_1_4' name='priv[]' {$groupinfo.priv.1_1_4}/><span class="custom-checkbox"></span>视频管理—删除</label>&nbsp;&nbsp;
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label class="label-checkbox inline"><input type='checkbox' value='1_2_0' name='priv[]' {$groupinfo.priv.1_2_0}/><span class="custom-checkbox"></span>游戏管理菜单</label>&nbsp;&nbsp;
+                            <label class="label-checkbox inline"><input type='checkbox' value='1_2_1' name='priv[]' {$groupinfo.priv.1_2_1}/><span class="custom-checkbox"></span>游戏管理—列表</label>&nbsp;&nbsp;
+                            <label class="label-checkbox inline"><input type='checkbox' value='1_2_2' name='priv[]' {$groupinfo.priv.1_2_2}/><span class="custom-checkbox"></span>游戏管理—添加</label>&nbsp;&nbsp;
+                            <label class="label-checkbox inline"><input type='checkbox' value='1_2_3' name='priv[]' {$groupinfo.priv.1_2_3}/><span class="custom-checkbox"></span>游戏管理—修改</label>&nbsp;&nbsp;
+                            <label class="label-checkbox inline"><input type='checkbox' value='1_2_4' name='priv[]' {$groupinfo.priv.1_2_4}/><span class="custom-checkbox"></span>游戏管理—删除</label>&nbsp;&nbsp;
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label class="label-checkbox inline"><input type='checkbox' value='1_3_0' name='priv[]' {$groupinfo.priv.1_3_0}/><span class="custom-checkbox"></span>应用管理菜单</label>&nbsp;&nbsp;
+                            <label class="label-checkbox inline"><input type='checkbox' value='1_3_1' name='priv[]' {$groupinfo.priv.1_3_1}/><span class="custom-checkbox"></span>应用管理—列表</label>&nbsp;&nbsp;
+                            <label class="label-checkbox inline"><input type='checkbox' value='1_3_2' name='priv[]' {$groupinfo.priv.1_3_2}/><span class="custom-checkbox"></span>应用管理—添加</label>&nbsp;&nbsp;
+                            <label class="label-checkbox inline"><input type='checkbox' value='1_3_3' name='priv[]' {$groupinfo.priv.1_3_3}/><span class="custom-checkbox"></span>应用管理—修改</label>&nbsp;&nbsp;
+                            <label class="label-checkbox inline"><input type='checkbox' value='1_3_4' name='priv[]' {$groupinfo.priv.1_3_4}/><span class="custom-checkbox"></span>应用管理—删除</label>&nbsp;&nbsp;
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>客户管理</td>
+                        <td>
+                            <label class="label-checkbox inline"><input type='checkbox' value='2_0' name='priv[]' {$groupinfo.priv.2_0}/><span class="custom-checkbox"></span>客户管理菜单</label>&nbsp;&nbsp;
+                            <label class="label-checkbox inline"><input type='checkbox' value='2_1' name='priv[]' {$groupinfo.priv.2_1}/><span class="custom-checkbox"></span>客户管理—列表</label>&nbsp;&nbsp;
+                            <label class="label-checkbox inline"><input type='checkbox' value='2_2' name='priv[]' {$groupinfo.priv.2_2}/><span class="custom-checkbox"></span>客户管理—添加</label>&nbsp;&nbsp;
+                            <label class="label-checkbox inline"><input type='checkbox' value='2_3' name='priv[]' {$groupinfo.priv.2_3}/><span class="custom-checkbox"></span>客户管理—修改</label>&nbsp;&nbsp;
+                            <label class="label-checkbox inline"><input type='checkbox' value='2_4' name='priv[]' {$groupinfo.priv.2_4}/><span class="custom-checkbox"></span>客户管理—删除</label>&nbsp;&nbsp;
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>数据报表</td>
+                        <td>
+                            <label class="label-checkbox inline"><input type='checkbox' value='3_0' name='priv[]' {$groupinfo.priv.3_0}/><span class="custom-checkbox"></span>数据报表菜单</label>&nbsp;&nbsp;
+                        </td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2">系统管理</td>
+                        <td>
+                            <label class="label-checkbox inline"><input type='checkbox' value='9_1_0' name='priv[]' {$groupinfo.priv.9_1_0}/><span class="custom-checkbox"></span>角色权限管理菜单</label>&nbsp;&nbsp;
+                            <label class="label-checkbox inline"><input type='checkbox' value='9_1_1' name='priv[]' {$groupinfo.priv.9_1_1}/><span class="custom-checkbox"></span>角色权限管理—列表</label>&nbsp;&nbsp;
+                            <label class="label-checkbox inline"><input type='checkbox' value='9_1_2' name='priv[]' {$groupinfo.priv.9_1_2}/><span class="custom-checkbox"></span>角色权限管理—添加</label>&nbsp;&nbsp;
+                            <label class="label-checkbox inline"><input type='checkbox' value='9_1_3' name='priv[]' {$groupinfo.priv.9_1_3}/><span class="custom-checkbox"></span>角色权限管理—修改</label>&nbsp;&nbsp;
+                            <label class="label-checkbox inline"><input type='checkbox' value='9_1_4' name='priv[]' {$groupinfo.priv.9_1_4}/><span class="custom-checkbox"></span>角色权限管理—删除</label>&nbsp;&nbsp;
+                            <label class="label-checkbox inline"><input type='checkbox' value='9_1_5' name='priv[]' {$groupinfo.priv.9_1_5}/><span class="custom-checkbox"></span>角色权限管理—权限分配</label>&nbsp;&nbsp;
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label class="label-checkbox inline"><input type='checkbox' value='9_2_0' name='priv[]' {$groupinfo.priv.9_2_0}/><span class="custom-checkbox"></span>系统用户管理菜单</label>&nbsp;&nbsp;
+                            <label class="label-checkbox inline"><input type='checkbox' value='9_2_1' name='priv[]' {$groupinfo.priv.9_2_1}/><span class="custom-checkbox"></span>系统用户管理—列表</label>&nbsp;&nbsp;
+                            <label class="label-checkbox inline"><input type='checkbox' value='9_2_2' name='priv[]' {$groupinfo.priv.9_2_2}/><span class="custom-checkbox"></span>系统用户管理—添加</label>&nbsp;&nbsp;
+                            <label class="label-checkbox inline"><input type='checkbox' value='9_2_3' name='priv[]' {$groupinfo.priv.9_2_3}/><span class="custom-checkbox"></span>系统用户管理—修改</label>&nbsp;&nbsp;
+                            <label class="label-checkbox inline"><input type='checkbox' value='9_2_4' name='priv[]' {$groupinfo.priv.9_2_4}/><span class="custom-checkbox"></span>系统用户管理—冻结/解冻</label>&nbsp;&nbsp;
+                            <label class="label-checkbox inline"><input type='checkbox' value='9_2_5' name='priv[]' {$groupinfo.priv.9_2_5}/><span class="custom-checkbox"></span>系统用户管理—变更角色</label>&nbsp;&nbsp;
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                    <input type='hidden' name='act' value='{$act}'/>
+                    <input type='hidden' name='id' value='{$id}'/>
+                    <button type="submit" class="btn btn-success">保存</button>
+                    <a href="{:U('System/rolemgr')}" type="reset" class="btn btn-danger">取消</a>
+            </form>
+            </div>
+        </div>
+    </div>
+    <script>
+        function selall(isall) {
+            if (isall == 1) {
+                $("[type='checkbox']").prop("checked", true);
+            }
+            else {
+                $("[type='checkbox']").prop("checked", false);
+            }
+        }
+    </script>
+</block>

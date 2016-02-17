@@ -1,0 +1,54 @@
+<extend name="Public:base"/>
+<block name='customermenu'>active</block>
+<block name="extjs">
+    <!-- Parsley -->
+    <script src="__PUBLIC__/Admin/Endless/js/parsley.cn.min.js"></script>
+</block>
+<block name="pagecont">
+    <div id="main-container">
+        <div class="padding-md">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3>客户编辑</h3>
+                </div>
+                <div class="panel-body">
+                    <form id="formToggleLine" class="form-horizontal no-margin form-border" action="__ACTION__" method="post">
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label">客户名称</label>
+                            <div class="col-lg-10">
+                                <input class="form-control" type="text" placeholder="请输入客户名称"  data-required="true"  name="name" value="{$data.name}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label">客户地址</label>
+                            <div class="col-lg-10">
+                                <input class="form-control" type="text" placeholder="请输入客户地址" name="address" value="{$data.address}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label">联系人</label>
+                            <div class="col-lg-10">
+                                <input class="form-control" type="text" placeholder="请输入联系人" name="contact" value="{$data.contact}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label">联系电话</label>
+                            <div class="col-lg-10">
+                                <input class="form-control" type="text" placeholder="请输入联系电话或手机" name="contactinfo" value="{$data.contactinfo}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label"></label>
+                            <div class="col-lg-10">
+                                <input type="hidden" name="act" value="{$act}"/>
+                                <input type="hidden" name="id" value="{$data.id}"/>
+                                <button type="submit" class="btn btn-success">保存</button>
+                                <a href="{:U('Customer/customermgr')}" type="reset" class="btn btn-danger">取消</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</block>

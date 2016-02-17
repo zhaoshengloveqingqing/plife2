@@ -1,0 +1,10 @@
+.current {
+    background: #5a5a5a;
+    border-color: rgba(0,0,0,.2);
+    box-shadow: 0 0 3px rgba(0,0,0,.7) inset;
+    -moz-box-shadow: 0 0 3px rgba(0,0,0,.7) inset;
+    -webkit-box-shadow: 0 0 3px rgba(0,0,0,.7) inset;
+    z-index: 2;
+    color: #fff;
+    cursor: default;
+}
