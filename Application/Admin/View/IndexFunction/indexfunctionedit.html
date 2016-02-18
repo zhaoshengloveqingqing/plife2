@@ -1,0 +1,73 @@
+<extend name="Public:base"/>
+<block name='commentmenu'>active</block>
+<block name="pagecont">
+    <div id="main-container">
+        <div class="padding-md">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <if condition="($act eq add) ">
+                        <h3>评论新增</h3>
+                        <else/>
+                        <h3>评论编辑</h3>
+                    </if>
+                </div>
+                <div class="panel-body">
+                    <form id="formToggleLine" class="form-horizontal no-margin form-border" method="post" action="__ACTION__"  enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label">标题</label>
+                            <div class="col-lg-10">
+                                <input class="form-control" type="text" placeholder="请输入首页功能标题" name="title" id="title"  value="{$data.title}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label">排序</label>
+                            <div class="col-lg-10">
+                                <input class="form-control" type="text" placeholder="请输入首页功能排序" name="sort" id="sort" value="{$data.sort}">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label">描述</label>
+                            <div class="col-lg-10">
+                                <textarea class="form-control" rows="5" placeholder="请输入首页功能描述" name="description" id="description">{$data.description}</textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label"></label>
+                            <div class="col-lg-10">
+                                <input type="hidden" name="act" value="{$act}"/>
+                                <input type="hidden" name="id" value="{$data.id}"/>
+                                <button type="submit" onclick ="return valid();" class="btn btn-success">保存</button>
+                                <a href="{:U('IndexFunction/indexfunctionmgr')}" type="reset" class="btn btn-danger">取消</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</block>
+
+
+<block name="extjs">
+    <script language="javascript" type="text/javascript">
+        function valid(){
+            var title = document.getElementById("title").value;
+            var sort = document.getElementById("sort").value;
+            var description = document.getElementById("description").value;
+            if(title==""){
+                alert("标题不能为空");
+                return false;
+            }
+            if(sort==""){
+                alert("排序不能为空");
+                return false;
+            }
+            if(description==""){
+                alert("描述不能为空");
+                return false;
+            }
+            return true;
+        }
+    </script>
+</block>

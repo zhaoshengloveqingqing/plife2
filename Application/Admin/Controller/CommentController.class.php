@@ -132,7 +132,7 @@ class CommentController extends Controller {
         $this->checkPriv('1_3_4');
         $id = I('get.id','','int');
         if($id){
-            $data['isdel']= date("Y-m-d H:i:s");;
+            $data['isdel']= date("Y-m-d H:i:s");
             $this->Comment->where('id='.$id)->save($data);
             $from = I('server.HTTP_REFERER');
             redirect($from);

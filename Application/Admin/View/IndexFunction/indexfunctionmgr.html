@@ -5,36 +5,36 @@
         <div class="padding-md">
             <div class="panel panel-default table-responsive">
                 <div class="panel-heading">
-                    <h4>评论管理
+                    <h4>首页功能模块管理
                     <span class="label label-info pull-right">共 {$total} 项</span></h4>
                 </div>
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-md-4 col-sm-4">
-                            <a href="{:U('Comment/addcomment')}" class="btn btn-sm btn-success" type="button"><i class="fa fa-plus fa-lg"></i> 添加评论</a>
+                            <a href="{:U('IndexFunction/addindexfunction')}" class="btn btn-sm btn-success" type="button"><i class="fa fa-plus fa-lg"></i> 添加模块</a>
                         </div><!-- /.col -->
                     </div><!-- /.row -->
                 </div>
                 <table class="table table-striped" id="responsiveTable">
                     <thead>
                     <tr>
-                        <th width="15%">评论者</th>
-                        <th width="15%">评论类型</th>
-                        <th width="20%">评论内容</th>
-                        <th width="15%">评论时间</th>
+                        <th width="15%">标题</th>
+                        <th width="15%">描述</th>
+                        <th width="20%">排序</th>
+                        <th width="15%">创建时间</th>
                         <th width="25%">操作</th>
                     </tr>
                     </thead>
                     <tbody>
                     <volist name="data" id="vo">
                         <tr>
-                            <td>{$vo.reviewer}</td>
-                            <td>{$vo.type}</td>
-                            <td>{$vo.contact}</td>
+                            <td>{$vo.title}</td>
+                            <td>{$vo.description}</td>
+                            <td>{$vo.sort}</td>
                             <td>{$vo.creatime}</td>
                             <td class="center">
-                                <a href="{:U('Comment/editcomment',array('id'=>$vo['id']))}" type="button" class="btn btn-outline btn-primary btn-xs">修改</a>
-                                <a type="button" class="btn btn-outline btn-primary btn-xs" href="{:U('Comment/deldns',array('id'=>$vo['id']))}" onclick="if(!confirm('您是否确定要删除该评论记录？')){return  false;}">删除</a>
+                                <a href="{:U('IndexFunction/editindexfunction',array('id'=>$vo['id']))}" type="button" class="btn btn-outline btn-primary btn-xs">修改</a>
+                                <a type="button" class="btn btn-outline btn-primary btn-xs" href="{:U('IndexFunction/delindexfunction',array('id'=>$vo['id']))}" onclick="if(!confirm('您是否确定要删除该模块记录？')){return  false;}">删除</a>
                             </td>
                         </tr>
                     </volist>

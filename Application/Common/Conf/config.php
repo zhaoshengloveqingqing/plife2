@@ -7,7 +7,7 @@ return array(
     'DB_USER'   => 'root',
     'DB_PWD'    => '',
     'DB_PORT'   => 3306, 
-    'DB_PREFIX' => 'pn_',
+    'DB_PREFIX' => 'pn2_',
     'URL_CASE_INSENSITIVE' =>true, 
     'SITE_NAME'	=>'Pinet',
     'ITEM_IMG_MAXSIZE' => 4194304,
