@@ -48,4 +48,13 @@ class AdminuserLogic extends \Think\Model{
         return true;
     }
 
+    public function getUserID($email){
+        if($email){
+            $data = $this->Admin->where(array('email'=>$email))->find();
+            return $data;
+        }else{
+            return false;
+        }
+    }
+
 }

@@ -42,7 +42,7 @@ class AdminuserController extends Controller {
     }
 
     private function initmenu($privarr){
-        $allmenu = array('1_1_0','1_2_0','1_3_0','1_4_0','1_5_0','2_0','3_0','4_1_0','4_2_0','5_0','6_0','9_1_0','9_2_0');
+        $allmenu = array('1_1_0','1_2_0','1_3_0','1_4_0','1_5_0','2_0','3_0','4_1_0','4_2_0','5_0','6_0','9_1_0','9_2_0','9_3_0');
         $truemenu = array();
         if(session('issuper')){
             $truemenu = $allmenu;

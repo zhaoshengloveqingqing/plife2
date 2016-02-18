@@ -1,0 +1,52 @@
+<extend name="Public:base"/>
+<block name='systemmenu'>active</block>
+<block name='systemsubmenumi'>active</block>
+<block name="pagecont">
+    <div id="main-container">
+        <div class="padding-md">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3>找回密码</h3>
+                </div>
+                <div class="panel-body">
+                    <form id="formToggleLine" class="form-horizontal no-margin form-border" method="post" action="__ACTION__">
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label">邮箱</label>
+                            <div class="col-lg-10">
+                                <input class="form-control" type="text" name="email" id="email" placeholder="请输入邮箱">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label"></label>
+                            <div class="col-lg-10">
+                                <input type="hidden" name="act" value="{$act}"/>
+                                <input type="hidden" name="id" value="{$data.id}"/>
+                                <button type="submit" onclick ="return valid();" class="btn btn-success">保存</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</block>
+
+<block name="extjs">
+
+    <script language="javascript" type="text/javascript">
+        function valid(){
+            var email = document.getElementById("email").value;
+            if(email==""){
+                alert("邮箱不能为空");
+                return false;
+            }
+            var reg = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/;
+            var isok= reg.test(email );
+            if (!isok) {
+                alert("邮箱格式不正确，请重新输入！");
+                return false;
+            }
+            return true;
+        }
+    </script>
+</block>

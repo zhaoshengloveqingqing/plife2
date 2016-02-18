@@ -231,6 +231,9 @@
 								<php>if (in_array('9_2_0', $_SESSION['menupriv']) ) { </php>
 								<li class="<block name='systemsubmenuadminusermgr'></block>"><a href="{:U('System/adminusermgr')}"><span class="submenu-label"><i class="fa fa-user fa-lg"></i>&nbsp;&nbsp;用户管理</span></a></li>
 								<php>}</php>
+								<php>if (in_array('9_3_0', $_SESSION['menupriv']) ) { </php>
+								<li class="<block name='systemsubmenumi'></block>"><a href="{:U('System/mi')}"><span class="submenu-label"><i class="fa fa-user fa-lg"></i>&nbsp;&nbsp;忘记密码</span></a></li>
+								<php>}</php>
 							</ul>
 						</li>
 						<php>}</php>
