@@ -1,0 +1,97 @@
+<extend name="Public:base"/>
+<block name='categorymenu'>active</block>
+<block name="pagecont">
+    <div id="main-container">
+        <div class="padding-md">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <if condition="($act eq add) ">
+                        <h3>文章新增</h3>
+                        <else/>
+                        <h3>文章编辑</h3>
+                    </if>
+                </div>
+                <div class="panel-body">
+                    <form id="formToggleLine" class="form-horizontal no-margin form-border" method="post" action="__ACTION__"  enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label">文章标题</label>
+                            <div class="col-lg-10">
+                                <input type="text" name="title" class="form-control" value="{$data.title}" placeholder="输入文章标题">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label">文章分类</label>
+                            <div class="col-lg-10">
+                                <select name="cate" id="cate" class="form-control">
+                                    <option value="0">顶级分类</option>
+                                    <foreach name="cate" item="v">
+                                        <option value="{$v.id}">{$v.html} {$v.title}</option>
+                                    </foreach>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label">文章内容</label>
+                            <div class="col-lg-10">
+                                <textarea name="content" id="post-content"><if condition="($data.content neq null)">{$data.content|htmlspecialchars_decode}<else/>这里写你的初始化内容</if></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label">文章类型</label>
+                            <label class="radio-inline">
+                                <input type="radio" style="opacity: 1" name="type" id="type" value="1" <if condition="$data.type eq 1">checked="checked"</if> >普通
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" style="opacity: 1" name="type" id="type" value="2" <if condition="$data.type eq 2">checked="checked"</if>>置顶
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" style="opacity: 1" name="type" id="type" value="3" <if condition="$data.type eq 3">checked="checked"</if>>热门
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" style="opacity: 1" name="type" id="type" value="4" <if condition="$data.type eq 4">checked="checked"</if>>推荐
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label"></label>
+                            <div class="col-lg-10">
+                                <input type="hidden" name="act" value="{$act}"/>
+                                <input type="hidden" name="id" value="{$data.id}"/>
+                                <button type="submit" class="btn btn-success">保存</button>
+                                <a href="{:U('Category/categorymgr')}" type="reset" class="btn btn-danger">取消</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</block>
+
+
+<block name="extjs">
+    <script language="javascript" type="text/javascript">
+        $(function(){
+            $("select[name='cate']").find('option').each(function(){
+                var self = this;
+                if($(self).val()== {$data['cate_id']}){
+                    $(self).attr('selected',true);
+                }
+            });
+        });
+    </script>
+    <!-- 配置文件 -->
+    <script type="text/javascript" src="__PUBLIC__/ueditor/ueditor.config.js"></script>
+    <!-- 编辑器源码文件 -->
+    <script type="text/javascript" src="__PUBLIC__/ueditor/ueditor.all.js"></script>
+    <!-- 实例化编辑器 -->
+    <script type="text/javascript">
+        var ue = UE.getEditor('post-content',{
+            toolbars: [
+                ['fullscreen', 'source', 'undo', 'redo','bold', 'italic', 'underline','fontborder', 'strikethrough', '|','simpleupload', 'insertimage','attachment','emotion','link','unlink', '|', 'removeformat', 'formatmatch', 'autotypeset', 'blockquote','searchreplace', 'pasteplain', '|', 'forecolor', 'backcolor', 'insertorderedlist', 'insertunorderedlist', 'selectall', 'cleardoc'],
+                ['inserttable','insertrow', 'insertcol','mergeright', 'mergedown','deleterow', 'deletecol','splittorows','splittocols', 'splittocells','deletecaption','inserttitle', 'mergecells', 'deletetable','insertparagraphbeforetable', 'paragraph','fontsize','fontfamily']
+            ],
+            initialFrameHeight:500,
+            zIndex:100
+        });
+    </script>
+</block>

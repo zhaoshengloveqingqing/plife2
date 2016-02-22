@@ -147,16 +147,16 @@
 									<i class="fa fa-inbox fa-lg"></i>
 								</span>
 								<span class="text">
-									广告管理
+									阅读管理
 								</span>
 								<span class="menu-hover"></span>
 							</a>
 							<ul class="submenu">
 								<php>if (in_array('4_1_0', $_SESSION['menupriv']) ) { </php>
-								<li class="<block name='adssubmenubannermgr'></block>"><a href="{:U('Ads/bannermgr')}"><span class="submenu-label"><i class="fa fa-tag fa-lg"></i>&nbsp;&nbsp;广告列表</span></a></li>
+								<li class="<block name='adssubmenubannermgr'></block>"><a href="{:U('Book/bookmgr')}"><span class="submenu-label"><i class="fa fa-tag fa-lg"></i>&nbsp;&nbsp;图书管理</span></a></li>
 								<php>}</php>
 								<php>if (in_array('4_2_0', $_SESSION['menupriv']) ) { </php>
-								<li class="<block name='adssubmenupositionmgr'></block>"><a href="{:U('Ads/positionmgr')}"><span class="submenu-label"><i class="fa fa-tag fa-lg"></i>&nbsp;&nbsp;广告位置</span></a></li>
+								<li class="<block name='adssubmenupositionmgr'></block>"><a href="{:U('Book/readrecordmgr')}"><span class="submenu-label"><i class="fa fa-tag fa-lg"></i>&nbsp;&nbsp;用户阅读记录管理</span></a></li>
 								<php>}</php>
 							</ul>
 						</li>
@@ -182,6 +182,19 @@
 								</span>
 								<span class="text">
 									类别管理
+								</span>
+								<span class="menu-hover"></span>
+							</a>
+						</li>
+						<php>}</php>
+						<php>if (in_array('6_0', $_SESSION['menupriv'])) { </php>
+						<li class="<block name='postmenu'></block>">
+							<a href="{:U('Post/postmgr')}">
+								<span class="menu-icon">
+									<i class="fa fa-user-md fa-lg"></i>
+								</span>
+								<span class="text">
+									文章管理
 								</span>
 								<span class="menu-hover"></span>
 							</a>

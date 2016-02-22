@@ -18,6 +18,7 @@ class AdminuserController extends Controller {
                     if($tpass == $admininfo['password']){
                         session('expire',300);
                         session('name', $admininfo['nickname']);
+                        session('username', $admininfo['username']);
                         session('adminid', $admininfo['uid']);
                         session('issuper', (int)$admininfo['issuper']);
                         if($admininfo['privgid']){

@@ -42,4 +42,13 @@ class CategoryLogic extends \Think\Model{
             return false;
         }
     }
+
+    public function getCategoryById($id){
+        if($id){
+            $data = $this->Category->where(array('id'=>$id))->find();
+            return $data;
+        }else{
+            return false;
+        }
+    }
 }
