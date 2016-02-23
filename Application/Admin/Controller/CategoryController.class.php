@@ -42,7 +42,7 @@ class CategoryController extends Controller {
         if(I('post.act')=='add'){
             $newdata = array();
             $newdata['title'] = I('post.title');
-            $newdata['pid'] = I('post.pid');
+            $newdata['pid'] = I('post.type');
             $newdata['name'] = I('post.name');
             $newdata['keywords'] = I('post.keywords');
             $newdata['description'] = I('post.description');

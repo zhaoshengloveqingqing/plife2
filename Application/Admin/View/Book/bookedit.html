@@ -23,31 +23,19 @@
                         <div class="form-group">
                             <label class="col-lg-2 control-label">图书编号</label>
                             <div class="col-lg-10">
-                                <input class="form-control" type="text" placeholder="请输入图书编号" name="bno" value="{$data.url}">
+                                <input class="form-control" type="text" placeholder="请输入图书编号" name="bno" value="{$data.bno}">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-lg-2 control-label">图书作者</label>
                             <div class="col-lg-10">
-                                <input class="form-control" type="text" placeholder="请输入作者" name="author" value="{$data.url}">
+                                <input class="form-control" type="text" placeholder="请输入作者" name="author" value="{$data.author}">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-lg-2 control-label">出版社</label>
                             <div class="col-lg-10">
-                                <input class="form-control" type="text" placeholder="请输入出版社" name="press" value="{$data.url}">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-lg-2 control-label">图书章节</label>
-                            <div class="col-lg-10">
-                                <input class="form-control" type="text" placeholder="请输入章节" name="chapter" value="{$data.url}">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-lg-2 control-label">图书章节地址</label>
-                            <div class="col-lg-10">
-                                <input class="form-control" type="text" placeholder="请输入章节地址" name="chapteraddress" value="{$data.url}">
+                                <input class="form-control" type="text" placeholder="请输入出版社" name="press" value="{$data.press}">
                             </div>
                         </div>
                         <div class="form-group">
@@ -82,14 +70,6 @@
                             <div class="col-lg-10" id="localImag"><img id="preview" src="{$Think.WEB_ROOT}{$data.img}" width="150" height="180" style="display:block; width: 150px; height: 100px;">
                             </div>
                         </div>
-
-                        <div class="form-group">
-                            <label class="col-lg-2 control-label">章节内容</label>
-                            <div class="col-lg-10">
-                                <textarea name="content" id="post-content"><if condition="($data.content neq null)">{$data.content|htmlspecialchars_decode}<else/>这里写你的初始化内容</if></textarea>
-                            </div>
-                        </div>
-
                         <div class="form-group">
                             <label class="col-lg-2 control-label"></label>
                             <div class="col-lg-10">
@@ -108,19 +88,14 @@
 
 
 <block name="extjs">
-    <!-- 配置文件 -->
-    <script type="text/javascript" src="__PUBLIC__/ueditor/ueditor.config.js"></script>
-    <!-- 编辑器源码文件 -->
-    <script type="text/javascript" src="__PUBLIC__/ueditor/ueditor.all.js"></script>
-    <!-- 实例化编辑器 -->
-    <script type="text/javascript">
-        var ue = UE.getEditor('post-content',{
-            toolbars: [
-                ['fullscreen', 'source', 'undo', 'redo','bold', 'italic', 'underline','fontborder', 'strikethrough', '|','simpleupload', 'insertimage','attachment','emotion','link','unlink', '|', 'removeformat', 'formatmatch', 'autotypeset', 'blockquote','searchreplace', 'pasteplain', '|', 'forecolor', 'backcolor', 'insertorderedlist', 'insertunorderedlist', 'selectall', 'cleardoc'],
-                ['inserttable','insertrow', 'insertcol','mergeright', 'mergedown','deleterow', 'deletecol','splittorows','splittocols', 'splittocells','deletecaption','inserttitle', 'mergecells', 'deletetable','insertparagraphbeforetable', 'paragraph','fontsize','fontfamily']
-            ],
-            initialFrameHeight:500,
-            zIndex:100
+    <script language="javascript" type="text/javascript">
+        $(function(){
+            $("select[name='cid']").find('option').each(function(){
+                var self = this;
+                if($(self).val()== {$data['cid']}){
+                    $(self).attr('selected',true);
+                }
+            });
         });
     </script>
     <script type="text/javascript">

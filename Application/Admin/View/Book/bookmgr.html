@@ -31,7 +31,7 @@
                     <volist name="data" id="vo">
                         <tr>
                             <td>{$vo.name}</td>
-                            <td>{$vo.type}</td>
+                            <td>{$vo.cate}</td>
                             <td>{$vo.createdate}</td>
                             <td>{$vo.sort}</td>
                             <td class="center">
@@ -44,8 +44,8 @@
 
                             <td class="center">
                                 <a href="{:U('Book/chaptermgr',array('id'=>$vo['id']))}" type="button" class="btn btn-outline btn-primary btn-xs">图书章节管理</a>
-                                <a href="{:U('Ads/editbanner',array('id'=>$vo['id']))}" type="button" class="btn btn-outline btn-primary btn-xs">修改</a>
-                                <a type="button" class="btn btn-outline btn-primary btn-xs" href="{:U('Ads/delbanner',array('id'=>$vo['id']))}" onclick="if(!confirm('您是否确定要删除该记录？？')){return  false;}">删除</a>
+                                <a href="{:U('Book/editbook',array('id'=>$vo['id']))}" type="button" class="btn btn-outline btn-primary btn-xs">修改</a>
+                                <a type="button" class="btn btn-outline btn-primary btn-xs" href="{:U('Book/delbook',array('id'=>$vo['bookid']))}" onclick="if(!confirm('您是否确定要删除该记录？？')){return  false;}">删除</a>
                                 <if condition="($vo.status eq 2) ">
                                     <a type="button" class="btn btn-outline btn-primary btn-xs" href="{:U('Book/chgbookstatus',array('id'=>$vo['bookid'],'status'=>'1'))}" onclick="if(!confirm('您是否确定要上架该记录？？')){return  false;}">上架</a>
                                     <else/>

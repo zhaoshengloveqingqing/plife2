@@ -1,5 +1,5 @@
 <?php
-namespace Mobile\Controller;
+namespace Api\Controller;
 use Think\Controller;
 class CategoryController extends Controller
 {
@@ -16,13 +16,13 @@ class CategoryController extends Controller
 
     /**
      * 视频和app分类接口
-     * @param int pid : （可选）类型：1:视频（默认）  2:app
+     * @param int type : （可选）类型：1:视频（默认）  2:app 3:图书 4:装机分类
      * @return json : data
      */
     public function getcategories()
     {
-        $pid = I('post.pid', '', 'int') ? I('post.pid', '', 'int') : 1;
-        $data = $this->categoryLogic->getCategoryList($pid);
+        $type = I('post.type', '', 'int') ? I('post.type', '', 'int') : 1;
+        $data = $this->categoryLogic->getCategoryList($type);
         $this->ajaxReturn($data);
     }
 }

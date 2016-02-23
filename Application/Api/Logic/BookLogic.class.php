@@ -6,7 +6,7 @@
  * Time: 上午9:02
  */
 
-namespace Admin\Logic;
+namespace Api\Logic;
 
 
 class BookLogic extends \Think\Model{
@@ -112,6 +112,16 @@ class BookLogic extends \Think\Model{
         }else{
             return false;
         }
+    }
+
+    public function getReadRecordList($cond=array(), $p){
+        $mycond = array();
+        if(is_array($cond) && count($cond)>0){
+            $mycond = $cond;
+        }
+        $pstr = $p.','.C('ADMIN_REC_PER_PAGE');
+        $data = $this->Readrecord->where($mycond)->where('isdel is null')->page($pstr)->order('id asc')->select();
+        return $data;
     }
 
 }

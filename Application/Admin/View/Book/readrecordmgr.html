@@ -6,22 +6,23 @@
         <div class="padding-md">
             <div class="panel panel-default table-responsive">
                 <div class="panel-heading">
-                    <h4>position管理
+                    <h4>用户阅读记录管理
                     <span class="label label-info pull-right">共 {$total} 项</span></h4>
                 </div>
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="col-md-4 col-sm-4">
-                            <a href="{:U('Ads/addposition')}" class="btn btn-sm btn-success" type="button"><i class="fa fa-plus fa-lg"></i> 增加position</a>
-                        </div><!-- /.col -->
-                    </div><!-- /.row -->
-                </div>
+                <!--<div class="panel-body">-->
+                    <!--<div class="row">-->
+                        <!--<div class="col-md-4 col-sm-4">-->
+                            <!--<a href="{:U('Ads/addposition')}" class="btn btn-sm btn-success" type="button"><i class="fa fa-plus fa-lg"></i> 增加position</a>-->
+                        <!--</div>&lt;!&ndash; /.col &ndash;&gt;-->
+                    <!--</div>&lt;!&ndash; /.row &ndash;&gt;-->
+                <!--</div>-->
                 <table class="table table-striped" id="responsiveTable">
                     <thead>
                     <tr>
-                        <th width="25%">position名称</th>
-                        <th width="15%">高度</th>
-                        <th width="10%">宽度</th>
+                        <th width="25%">图书章节标题</th>
+                        <th width="15%">图书章节</th>
+                        <th width="10%">阅读次数</th>
+                        <th width="10%">阅读者</th>
                         <th width="25%">操作</th>
                     </tr>
                     </thead>
@@ -29,8 +30,9 @@
                     <volist name="data" id="vo">
                         <tr>
                             <td>{$vo.name}</td>
-                            <td>{$vo.height}</td>
-                            <td>{$vo.width}</td>
+                            <td>{$vo.chapter}</td>
+                            <td>{$vo.hits}</td>
+                            <td>{$vo.username}</td>
                             <td class="center">
                                 <a href="{:U('Ads/editposition',array('id'=>$vo['id']))}" type="button" class="btn btn-outline btn-primary btn-xs">修改</a>
                                 <a type="button" class="btn btn-outline btn-primary btn-xs" href="{:U('Resource/delposition',array('id'=>$vo['id']))}" onclick="if(!confirm('您是否确定要删除该应用记录？？')){return  false;}">删除</a>

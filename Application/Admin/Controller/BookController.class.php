@@ -33,6 +33,9 @@ class BookController extends Controller {
         $p = getCurPage();
         $where = array();
         $res = $this->bookLogic->getBookList($where,$p);
+        foreach($res as $k=> $v){
+            $res[$k]['cate'] = $this->categoryLogic->getCategoryById($v['cid'])['title'];
+        }
         $this->data = $res;
         $this->total = $this->bookLogic->getBookTotal();
         $show = constructAdminPage($this->total);
@@ -74,7 +77,7 @@ class BookController extends Controller {
         }
     }
 
-    public function editbanner(){
+    public function editbook(){
         $this->checkPriv('1_3_3');
         $this->assign('act','edit');
         $this->assign('errcode','0');
@@ -82,22 +85,21 @@ class BookController extends Controller {
             $newdata = array();
             $id = I('post.id','','int');
             $newdata['name'] = I('post.name');
-            $newdata['url'] = I('post.url');
-            $newdata['type'] = I('post.type');
-            $newdata['content'] = I('post.content');
+            $newdata['bno'] = I('post.bno');
+            $newdata['authorno'] = I('post.authorno');
+            $newdata['author'] = I('post.author');
             $newdata['sort'] = I('post.sort');
-            $newdata['start_time'] = I('post.start_time');
-            $newdata['end_time'] = I('post.end_time');
-            $newdata['status']='1';
+            $newdata['press'] = I('post.press');
+            $newdata['cid'] = I('post.cid');
 
             $upres = $this->upimgfile();
 
             if($upres['error'] == false){
                 $newdata['img'] = $upres['result']['img']['fullpath'];
             }
-            $ret = $this->Banner->where('id='.$id)->save($newdata);
+            $ret = $this->Bookparam->where('id='.$id)->save($newdata);
             if($ret){
-                $this->redirect('Ads/bannermgr');
+                $this->redirect('book/bookmgr');
             }else{
                 $this->assign('errcode','1');  // 修改失败
                 $this->error('编辑数据错误');
@@ -105,29 +107,20 @@ class BookController extends Controller {
         }else{
 
             $id = I('get.id','','int');
-            $data = $this->bannerLogic->getBannerById($id);
-//            $data['html_content']=htmlspecialchars($data['content']);
+            $data = $this->bookLogic->getBookParamById($id);
             $this->data = $data;
-            $type=array(
-                array('id'=>'0','value'=>'图片'),
-                array('id'=>'1','value'=>'Flash'),
-                array('id'=>'2','value'=>'代码'),
-                array('id'=>'3','value'=>'文字')
-            );
-
-            $this->assign('simgs',json_decode($data['imgs']));
-            $this->assign('type',$data['type']);
-            $this->assign('types',$type);
-            $this->display("Ads/banneredit");
+            $cates = getSortedCategory($this->categoryLogic->getCategoryList());
+            $this->assign('cate',$cates);
+            $this->display("Book/bookedit");
         }
     }
 
-    public function delbanner(){
+    public function delbook(){
         $this->checkPriv('1_3_4');
         $id = I('get.id','','int');
         if($id){
             $data['isdel']= date("Y-m-d H:i:s");;
-            $this->Banner->where('id='.$id)->save($data);
+            $this->Book->where('id='.$id)->save($data);
             $from = I('server.HTTP_REFERER');
             redirect($from);
         }else{
@@ -154,7 +147,7 @@ class BookController extends Controller {
             $this->error('该记录不存在');
         }
     }
-    //position
+
     public function chaptermgr(){
         $this->checkPriv('1_3_1');
         $p = getCurPage();
@@ -179,9 +172,9 @@ class BookController extends Controller {
             $newdata['chapteraddress'] = I('post.chapteraddress');
             $newdata['chaptercontent'] = I('post.chaptercontent');
             $newdata['sort'] = I('post.sort');
-            $newdata['name'] = I('post.name');
-            $newdata['pid'] = I('post.id');
-            $data = $this->bookLogic->getBookParamById(I('post.id'));
+            $newdata['name'] = I('post.chaptertitle');
+            $newdata['pid'] = I('post.bid');
+            $data = $this->bookLogic->getBookParamById(I('post.bid'));
             $newdata['bookid'] = $data['bookid'];
             $newdata['createdate'] = date('Y-m-d H:i:s');
             $data = $this->Bookparam->add($newdata);
@@ -207,43 +200,90 @@ class BookController extends Controller {
         if(I('post.act')=='edit'){
             $newdata = array();
             $id = I('post.bid');
+            $pid = I('post.pid');
             $newdata['chapter'] = I('post.chapter');
             $newdata['chapteraddress'] = I('post.chapteraddress');
             $newdata['chaptercontent'] = I('post.chaptercontent');
             $newdata['sort'] = I('post.sort');
-            $newdata['name'] = I('post.name');
-            $newdata['pid'] = I('post.id');
+            $newdata['name'] = I('post.chaptertitle');
             $data = $this->bookLogic->getBookParamById(I('post.id'));
             $newdata['bookid'] = $data['bookid'];
             $newdata['createdate'] = date('Y-m-d H:i:s');
             $ret = $this->Bookparam->where('id='.$id)->save($newdata);
             if($ret){
-                $this->redirect('Book/chaptermgr');
+                $this->redirect('Book/chaptermgr',array('pid'=>$pid));
             }else{
                 $this->assign('errcode','1');  // 修改失败
                 $this->error('编辑数据失败');
             }
         }else{
             $id = I('get.id');
+            $pid = I('get.pid');
             $data = $this->bookLogic->getChapterParamById($id);
             $this->data = $data;
-            $res = $this->bookLogic->getBookParamById($id);
+            $res = $this->bookLogic->getBookParamById($pid);
             $cate = $this->categoryLogic->getCategoryById($res['cid']);
             $this->assign('cate',$cate);
-            $this->redirect('Book/chaptermgr',array('id'=>$id));
+            $this->display("Book/chapteredit");
         }
     }
 
-    public function delposition(){
+    public function delchapter(){
         $this->checkPriv('1_3_4');
         $id = I('get.id','','int');
         if($id){
             $data['isdel']= date("Y-m-d H:i:s");;
-            $this->Position->where('id='.$id)->save($data);
+            $this->Bookparam->where('id='.$id)->save($data);
             $from = I('server.HTTP_REFERER');
             redirect($from);
         }else{
             $this->error('该记录不存在');
+        }
+    }
+
+    public function readrecordmgr(){
+        $this->checkPriv('1_3_1');
+        $p = getCurPage();
+        $where = array();
+        $res = $this->bookLogic->getRecordList($where,$p);
+        foreach($res as $k=>$v){
+            $res[$k]['username']=session('username');
+        }
+        $this->data = $res;
+        $this->total = $this->bookLogic->getRecordTotal();
+        $show = constructAdminPage($this->total);
+        $this->assign('id',I('get.id'));
+        $this->assign('page',$show);
+        $this->display();
+    }
+
+    public function readrecord(){
+        $id = I('get.id');
+        if($id){
+            $data = $this->bookLogic->getRecordById($id);
+            if($data&&$data['uid']==session('adminid')){
+                $newdata['hits'] = $data['hits']+1;
+                $ret = $this->Readrecord->where('id='.$data['id'])->save($newdata);
+                if($ret){
+                    $this->redirect('Book/readrecordmgr');
+                }else{
+                    $this->error('插入数据错误');
+                }
+            }else{
+                $data = $this->bookLogic->getChapterParamById($id);
+                $newdata['bookid'] = $data['bookid'];
+                $newdata['chapter'] = $data['chapter'];
+                $newdata['paramid'] = $id;
+                $newdata['hits'] = 1;
+                $newdata['uid'] = session('adminid');
+                $newdata['createdate'] = date('Y-m-d H:i:s');
+                $res =  $this->Readrecord->add($newdata);
+                if($res){
+                    $this->redirect('Book/readrecordmgr');
+                }else{
+                    $this->error('插入数据错误');
+                }
+            }
         }
     }
 
@@ -292,4 +332,5 @@ class BookController extends Controller {
         }
         return $ret;
     }
+
 }

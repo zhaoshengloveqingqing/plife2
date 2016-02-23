@@ -12,7 +12,7 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-md-4 col-sm-4">
-                            <a href="{:U('Book/addchapter',array('id'=>($id)))}" class="btn btn-sm btn-success" type="button"><i class="fa fa-plus fa-lg"></i> 增加图书</a>
+                            <a href="{:U('Book/addchapter',array('id'=>($id)))}" class="btn btn-sm btn-success" type="button"><i class="fa fa-plus fa-lg"></i> 增加图书章节</a>
                         </div><!-- /.col -->
                     </div><!-- /.row -->
                 </div>
@@ -36,14 +36,9 @@
                             <td>{$vo.createdate}</td>
                             <td>{$vo.sort}</td>
                             <td class="center">
-                                <a href="{:U('Book/editchapter',array('id'=>$vo['id']))}" type="button" class="btn btn-outline btn-primary btn-xs">修改</a>
+                                <a href="{:U('Book/readrecord',array('id'=>$vo['id'],'pid'=>$vo['pid']))}" type="button" class="btn btn-outline btn-primary btn-xs">记录用户阅读</a>
+                                <a href="{:U('Book/editchapter',array('id'=>$vo['id'],'pid'=>$vo['pid']))}" type="button" class="btn btn-outline btn-primary btn-xs">修改</a>
                                 <a type="button" class="btn btn-outline btn-primary btn-xs" href="{:U('Book/delchapter',array('id'=>$vo['id']))}" onclick="if(!confirm('您是否确定要删除该记录？？')){return  false;}">删除</a>
-                                <if condition="($vo.status eq 2) ">
-                                    <a type="button" class="btn btn-outline btn-primary btn-xs" href="{:U('Book/chgbookstatus',array('id'=>$vo['bookid'],'status'=>'1'))}" onclick="if(!confirm('您是否确定要上架该记录？？')){return  false;}">上架</a>
-                                    <else/>
-                                    <a type="button" class="btn btn-outline btn-primary btn-xs" href="{:U('Book/chgbookstatus',array('id'=>$vo['bookid'],'status'=>'2'))}" onclick="if(!confirm('您是否确定要下架该记录？？')){return  false;}">下架</a>
-                                </if>
-
                             </td>
                         </tr>
                     </volist>
