@@ -113,33 +113,6 @@
 				</div><!-- /user-block -->
 				<div class="main-menu">
 					<ul>
-						<php>if (in_array('1_1_0', $_SESSION['menupriv']) || in_array('1_2_0', $_SESSION['menupriv']) || in_array('1_3_0', $_SESSION['menupriv'])|| in_array('1_4_0', $_SESSION['menupriv'])|| in_array('1_5_0', $_SESSION['menupriv'])) { </php>
-						<li class="openable <block name='resmenu'></block>">
-							<a href="#">
-								<span class="menu-icon">
-									<i class="fa fa-inbox fa-lg"></i>
-								</span>
-								<span class="text">
-									资源管理
-								</span>
-								<span class="menu-hover"></span>
-							</a>
-							<ul class="submenu">
-								<php>if (in_array('1_1_0', $_SESSION['menupriv']) ) { </php>
-								<li class="<block name='ressubmenuvideomgr'></block>"><a href="{:U('Resource/videomgr')}"><span class="submenu-label"><i class="fa fa-film fa-lg"></i>&nbsp;&nbsp;视频管理</span></a></li>
-								<php>}</php>
-								<php>if (in_array('1_2_0', $_SESSION['menupriv']) ) { </php>
-								<li class="<block name='ressubmenugamemgr'></block>"><a href="{:U('Resource/gamemgr')}"><span class="submenu-label"><i class="fa fa-tablet fa-lg"></i>&nbsp;&nbsp;游戏管理</span></a></li>
-								<php>}</php>
-								<php>if (in_array('1_3_0', $_SESSION['menupriv']) ) { </php>
-								<li class="<block name='ressubmenuappmgr'></block>"><a href="{:U('Resource/appmgr')}"><span class="submenu-label"><i class="fa fa-tag fa-lg"></i>&nbsp;&nbsp;应用管理</span></a></li>
-								<php>}</php>
-								<php>if (in_array('1_5_0', $_SESSION['menupriv']) ) { </php>
-								<li class="<block name='ressubmenudnsmgr'></block>"><a href="{:U('Resource/dnsmgr')}"><span class="submenu-label"><i class="fa fa-tag fa-lg"></i>&nbsp;&nbsp;DNS管理</span></a></li>
-								<php>}</php>
-							</ul>
-						</li>
-						<php>}</php>
 						<php>if (in_array('4_1_0', $_SESSION['menupriv']) || in_array('4_2_0', $_SESSION['menupriv'])) { </php>
 						<li class="openable <block name='adsmenu'></block>">
 							<a href="#">

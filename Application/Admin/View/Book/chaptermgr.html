@@ -6,13 +6,13 @@
         <div class="padding-md">
             <div class="panel panel-default table-responsive">
                 <div class="panel-heading">
-                    <h4>图书管理
+                    <h4>章节管理管理
                     <span class="label label-info pull-right">共 {$total} 项</span></h4>
                 </div>
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-md-4 col-sm-4">
-                            <a href="{:U('Book/addbook')}" class="btn btn-sm btn-success" type="button"><i class="fa fa-plus fa-lg"></i> 增加图书</a>
+                            <a href="{:U('Book/addchapter',array('id'=>($id)))}" class="btn btn-sm btn-success" type="button"><i class="fa fa-plus fa-lg"></i> 增加图书</a>
                         </div><!-- /.col -->
                     </div><!-- /.row -->
                 </div>
@@ -20,10 +20,10 @@
                     <thead>
                     <tr>
                         <th width="15%">图书名称</th>
-                        <th width="15%">图书类型</th>
+                        <th width="15%">图书章节</th>
+                        <th width="15%">图书章节地址</th>
                         <th width="15%">发布时间</th>
                         <th width="10%">排序</th>
-                        <th width="10%">状态</th>
                         <th width="25%">操作</th>
                     </tr>
                     </thead>
@@ -31,21 +31,13 @@
                     <volist name="data" id="vo">
                         <tr>
                             <td>{$vo.name}</td>
-                            <td>{$vo.type}</td>
+                            <td>{$vo.chapter}</td>
+                            <td>{$vo.chapteraddress}</td>
                             <td>{$vo.createdate}</td>
                             <td>{$vo.sort}</td>
                             <td class="center">
-                                <if condition="($vo.status eq 1) ">
-                                    <a class="btn btn-success btn-xs">正常</a>
-                                    <else/>
-                                    <a class="btn btn-danger btn-xs">下架</a>
-                                </if>
-                            </td>
-
-                            <td class="center">
-                                <a href="{:U('Book/chaptermgr',array('id'=>$vo['id']))}" type="button" class="btn btn-outline btn-primary btn-xs">图书章节管理</a>
-                                <a href="{:U('Ads/editbanner',array('id'=>$vo['id']))}" type="button" class="btn btn-outline btn-primary btn-xs">修改</a>
-                                <a type="button" class="btn btn-outline btn-primary btn-xs" href="{:U('Ads/delbanner',array('id'=>$vo['id']))}" onclick="if(!confirm('您是否确定要删除该记录？？')){return  false;}">删除</a>
+                                <a href="{:U('Book/editchapter',array('id'=>$vo['id']))}" type="button" class="btn btn-outline btn-primary btn-xs">修改</a>
+                                <a type="button" class="btn btn-outline btn-primary btn-xs" href="{:U('Book/delchapter',array('id'=>$vo['id']))}" onclick="if(!confirm('您是否确定要删除该记录？？')){return  false;}">删除</a>
                                 <if condition="($vo.status eq 2) ">
                                     <a type="button" class="btn btn-outline btn-primary btn-xs" href="{:U('Book/chgbookstatus',array('id'=>$vo['bookid'],'status'=>'1'))}" onclick="if(!confirm('您是否确定要上架该记录？？')){return  false;}">上架</a>
                                     <else/>

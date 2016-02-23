@@ -7,14 +7,17 @@ class BookController extends Controller {
         parent::__construct();
         $this->bookLogic =  D('Book','Logic');
         $this->readrecordLogic =  D('Readrecord','Logic');
+        $this->categoryLogic =  D('Category','Logic');
         $this->Book=  M('Book');
         $this->Readrecord=  M('Readrecord');
+        $this->Bookparam=  M('Bookparam');
     }
 
     private $bookLogic ;
     private $readrecordLogic ;
     private $Book ;
     private $Readrecord ;
+    private $Bookparam;
 
     private function checkPriv($priv){
         $adminid = session('adminid');
@@ -44,33 +47,29 @@ class BookController extends Controller {
         if(I('post.act')=='add'){
             $newdata = array();
             $newdata['name'] = I('post.name');
-            $newdata['url'] = I('post.url');
-            $newdata['type'] = I('post.type');
-            $newdata['content'] = I('post.content');
+            $newdata['bno'] = I('post.bno');
+            $newdata['authorno'] = I('post.authorno');
+            $newdata['author'] = I('post.author');
             $newdata['sort'] = I('post.sort');
-            $newdata['start_time'] = I('post.start_time');
-            $newdata['end_time'] = I('post.end_time');
-            $newdata['status']='1';
+            $newdata['press'] = I('post.press');
+            $newdata['cid'] = I('post.cid');
             $upres = $this->upimgfile();
 
             if($upres['error'] == false){
-                $newdata['icon'] = $upres['result']['iconimg']['fullpath'];
+                $newdata['img'] = $upres['result']['img']['fullpath'];
             }
-            $newdata['img'] = I('post.img');
-            $ret = $this->Banner->add($newdata);
-            if($ret){
+            $ret = $this->Book->add(array('status'=>'1'));
+            $newdata['bookid'] = $ret;
+            $newdata['createdate'] = date('Y-m-d H:i:s');
+            $data = $this->Bookparam->add($newdata);
+            if($data){
                 $this->redirect('Book/bookmgr');
             }else{
                 $this->error('插入数据错误');
             }
         }else{
-            $type=array(
-                array('id'=>'0','value'=>'图片'),
-                array('id'=>'1','value'=>'Flash'),
-                array('id'=>'2','value'=>'代码'),
-                array('id'=>'3','value'=>'文字')
-            );
-            $this->assign('types',$type);
+            $cates = getSortedCategory($this->categoryLogic->getCategoryList());
+            $this->assign('cate',$cates);
             $this->display("book/bookedit");
         }
     }
@@ -136,16 +135,16 @@ class BookController extends Controller {
         }
     }
 
-    public function chgbannerstatus(){
+    public function chgbookstatus(){
         $id = I('get.id','','int');
         $status = I('get.status','','int');
         if($id){
             if($status == 1){
-                $this->Banner->where('id='.$id)->save(array('status'=>1));
+                $this->Book->where('id='.$id)->save(array('status'=>1));
                 $from = I('server.HTTP_REFERER');
                 redirect($from);
             }else if($status == 2){
-                $this->Banner->where('id='.$id)->save(array('status'=>2));
+                $this->Book->where('id='.$id)->save(array('status'=>2));
                 $from = I('server.HTTP_REFERER');
                 redirect($from);
             }else{
@@ -156,61 +155,82 @@ class BookController extends Controller {
         }
     }
     //position
-    public function positionmgr(){
+    public function chaptermgr(){
         $this->checkPriv('1_3_1');
         $p = getCurPage();
-        $res = $this->positionLogic->getPositionList(array(),$p);
+        $where = array();
+        $res = $this->bookLogic->getChapterList($where,$p);
         $this->data = $res;
-        $this->total = $this->positionLogic->getPositionTotal();
+        $this->total = $this->bookLogic->getChapterTotal();
         $show = constructAdminPage($this->total);
+        $this->assign('id',I('get.id'));
         $this->assign('page',$show);
         $this->display();
     }
 
-    public function addposition(){
+    public function addchapter(){
         $this->checkPriv('1_3_2');
         $this->assign('act','add');
         $this->assign('errcode','0');
+
         if(I('post.act')=='add'){
             $newdata = array();
+            $newdata['chapter'] = I('post.chapter');
+            $newdata['chapteraddress'] = I('post.chapteraddress');
+            $newdata['chaptercontent'] = I('post.chaptercontent');
+            $newdata['sort'] = I('post.sort');
             $newdata['name'] = I('post.name');
-            $newdata['width'] = I('post.width');
-            $newdata['height'] = I('post.height');
-            $newdata['description'] = I('post.description');
-            $ret = $this->Position->add($newdata);
-            if($ret){
-                $this->redirect('Ads/positionmgr');
+            $newdata['pid'] = I('post.id');
+            $data = $this->bookLogic->getBookParamById(I('post.id'));
+            $newdata['bookid'] = $data['bookid'];
+            $newdata['createdate'] = date('Y-m-d H:i:s');
+            $data = $this->Bookparam->add($newdata);
+            if($data){
+                $this->redirect('Book/chaptermgr');
             }else{
                 $this->error('插入数据错误');
             }
         }else{
-            $this->display("Ads/positionedit");
+            $id = I('get.id');
+            $data = $this->bookLogic->getBookParamById($id);
+            $this->data = $data;
+            $cate = $this->categoryLogic->getCategoryById($data['cid']);
+            $this->assign('cate',$cate);
+            $this->display("Book/chapteredit");
         }
     }
 
-    public function editposition(){
+    public function editchapter(){
         $this->checkPriv('1_3_3');
         $this->assign('act','edit');
         $this->assign('errcode','0');
         if(I('post.act')=='edit'){
             $newdata = array();
-            $id = I('post.id','','int');
+            $id = I('post.bid');
+            $newdata['chapter'] = I('post.chapter');
+            $newdata['chapteraddress'] = I('post.chapteraddress');
+            $newdata['chaptercontent'] = I('post.chaptercontent');
+            $newdata['sort'] = I('post.sort');
             $newdata['name'] = I('post.name');
-            $newdata['width'] = I('post.width');
-            $newdata['height'] = I('post.height');
-            $newdata['description'] = I('post.description');
-            $ret = $this->Position->where('id='.$id)->save($newdata);
+            $newdata['pid'] = I('post.id');
+            $data = $this->bookLogic->getBookParamById(I('post.id'));
+            $newdata['bookid'] = $data['bookid'];
+            $newdata['createdate'] = date('Y-m-d H:i:s');
+            $ret = $this->Bookparam->where('id='.$id)->save($newdata);
             if($ret){
-                $this->redirect('Ads/positionmgr');
+                $this->redirect('Book/chaptermgr');
             }else{
                 $this->assign('errcode','1');  // 修改失败
                 $this->error('编辑数据失败');
             }
         }else{
-            $id = I('get.id','','int');
-            $data = $this->positionLogic->getPositionById($id);
+            $id = I('get.id');
+            $data = $this->bookLogic->getChapterParamById($id);
             $this->data = $data;
-            $this->display("Ads/positionedit");
+            $res = $this->bookLogic->getBookParamById($id);
+            $cate = $this->categoryLogic->getCategoryById($res['cid']);
+            $this->assign('cate',$cate);
+            $this->redirect('Book/chaptermgr',array('id'=>$id));
         }
     }
 
